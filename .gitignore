@@ -1,0 +1,63 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+x64/
+x86/
+build/
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+artifacts/
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# ASP.NET / Web
+App_Data/aspnetdb*.mdf
+App_Data/aspnetdb*.ldf
+*.log
+publish/
+
+# User-specific files
+*.pidb
+*.userprefs
+*.userosscache
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# OS generated
+Thumbs.db
+ehthumbs.db
+.DS_Store
+
+# Others
+*.cache
+*.vsix
+*.db
+
+# Ensure we don't accidentally commit package restore files
+packages.config
+.nuget/
