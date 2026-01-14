@@ -99,10 +99,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\herosection.jpg" />
+    <Content Include="Assets\Images\logo.png" />
     <Content Include="Tickets.aspx" />
     <Content Include="UserTickets.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="Assets\Images\logo %283%29.png" />
     <Content Include="Movies.aspx" />
     <Content Include="Shows.aspx" />
     <Content Include="Halls.aspx" />
