@@ -21,7 +21,10 @@
             position: absolute;
             inset: 0;
             /* use a mild dark gradient over the image and reduce blur so image is more visible */
-            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('Assets/Images/herosection.jpg') no-repeat center center / cover;
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('Assets/Images/herosection.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
             filter: blur(4px) saturate(0.95);
             transform: scale(1.02);
             z-index: 1;
