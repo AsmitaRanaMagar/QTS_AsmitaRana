@@ -70,8 +70,6 @@
                         <asp:BoundField DataField="H_STATUS" HeaderText="Status" SortExpression="H_STATUS" />
                     </Columns>
                 </asp:GridView>
-
-                <!-- DataSource for Halls (used by GridView) -->
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server"
                     ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>"
                     ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>"
