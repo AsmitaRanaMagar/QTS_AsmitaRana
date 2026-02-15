@@ -101,8 +101,8 @@
   <ItemGroup>
     <Content Include="Assets\Images\herosection.jpg" />
     <Content Include="Assets\Images\logo.png" />
+    <Content Include="sql\create_movies_table.sql" />
     <Content Include="Tickets.aspx" />
-    <Content Include="UserTickets.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Movies.aspx" />
     <Content Include="Shows.aspx" />
@@ -196,13 +196,6 @@
     </Compile>
     <Compile Include="Tickets.aspx.designer.cs">
       <DependentUpon>Tickets.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserTickets.aspx.cs">
-      <DependentUpon>UserTickets.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserTickets.aspx.designer.cs">
-      <DependentUpon>UserTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

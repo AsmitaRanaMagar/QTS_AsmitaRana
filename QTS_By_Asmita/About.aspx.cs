@@ -13,5 +13,10 @@ namespace QTS_By_Asmita
         {
 
         }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

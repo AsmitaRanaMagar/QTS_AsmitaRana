@@ -2,14 +2,28 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title><%: Page.Title %> - Quick Cinema Hall</title>
-
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
+    <head runat="server">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+        <style>
+            .custom-select {
+                background-color: transparent !important;
+                color: #ffffff !important;
+                border: 1px solid #ffffff !important;
+                border-radius: .375rem !important; /* rounded-md */
+                padding: .25rem .5rem !important;
+            }
+            .custom-select option {
+                background-color: #000000 !important;
+                color: #ffffff !important;
+            }
+            .custom-select::-ms-expand { display: block; }
+        </style>
+        <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+    </head>
     </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
@@ -131,7 +145,6 @@
                     <a class="nav-link" runat="server" href="~/Shows">Shows</a>
                     <a class="nav-link" runat="server" href="~/Movies">Movies</a>
                     <a class="nav-link" runat="server" href="~/Tickets">Tickets</a>
-                    <a class="nav-link" runat="server" href="~/UserTickets">User Tickets</a>
                     <a class="nav-link" runat="server" href="~/Customer">Customer</a>
                 </nav>
                 <button id="nav-toggle" type="button"
@@ -151,7 +164,6 @@
                 <a class="block nav-link" runat="server" href="~/Shows">Shows</a>
                 <a class="block nav-link" runat="server" href="~/Movies">Movies</a>
                 <a class="block nav-link" runat="server" href="~/Tickets">Tickets</a>
-                <a class="block nav-link" runat="server" href="~/UserTickets">User Tickets</a>
                 <a class="block nav-link" runat="server" href="~/Customer">Users</a>
             </div>
         </div>

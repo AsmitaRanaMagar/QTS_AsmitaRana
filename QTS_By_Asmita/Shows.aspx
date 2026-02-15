@@ -1,46 +1,74 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Shows.aspx.cs" Inherits="QTS_By_Asmita.Shows" %>
-
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
-     <div class="max-w-xl mx-auto my-6 font-sans">
-         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
-             <asp:Panel ID="pnlAdd" runat="server">
-                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-center text-sm">
+    <div class="max-w-xl mx-auto my-6 font-sans">
+        <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
+            <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">
+                Add New Show
+            </h3>
+            <asp:Panel ID="pnlAdd" runat="server">
+                <div class="flex justify-center">
+                    <div class="grid grid-cols-[120px_1fr] gap-x-3 gap-y-3 text-sm w-full max-w-md">
+                        <asp:Label ID="lblShowID" runat="server"
+                            Text="Show ID:"
+                            AssociatedControlID="txtShowID"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtShowID" runat="server"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1"
+                            required="required" />
 
-                     <h3 class="text-lg font-semibold mb-3 text-yellow-400 md:col-span-3 text-center">Add New Show</h3>
+                        <asp:Label ID="lblShowMovieID" runat="server"
+                            Text="Movie:"
+                            AssociatedControlID="ddlMovie"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:DropDownList ID="ddlMovie" runat="server" DataSourceID="SqlDataSourceMovies" DataTextField="MV_TITLE" DataValueField="MV_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" AppendDataBoundItems="true"><asp:ListItem Text="Select movie" Value="" /></asp:DropDownList>
 
-                     <asp:Label ID="lblShowID" runat="server" Text="Show ID:" AssociatedControlID="txtShowID" CssClass="font-medium md:col-span-1" />
-                     <asp:TextBox ID="txtShowID" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" required="required" />
+                        <asp:Label ID="lblShowHallID" runat="server"
+                            Text="Hall:"
+                            AssociatedControlID="ddlHallID"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:DropDownList ID="ddlHallID" runat="server" DataSourceID="SqlDataSourceHalls" DataTextField="H_NAME" DataValueField="H_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" AppendDataBoundItems="true"><asp:ListItem Text="Select hall" Value="" /></asp:DropDownList>
 
-                     <asp:Label ID="lblShowMovieID" runat="server" Text="Movie:" AssociatedControlID="ddlMovie" CssClass="font-medium md:col-span-1" />
-                     <asp:DropDownList ID="ddlMovie" runat="server" DataSourceID="SqlDataSourceMovies" DataTextField="MV_TITLE" DataValueField="MV_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" AppendDataBoundItems="true">
-                        <asp:ListItem Text="Select movie" Value="" />
-                     </asp:DropDownList>
+                        <asp:Label ID="lblShowDate" runat="server"
+                            Text="Show Date:"
+                            AssociatedControlID="txtShowDate"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtShowDate" runat="server" TextMode="Date"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                     <asp:Label ID="lblShowHallID" runat="server" Text="Hall:" AssociatedControlID="ddlHallID" CssClass="font-medium md:col-span-1" />
-                     <asp:DropDownList ID="ddlHallID" runat="server" DataSourceID="SqlDataSourceHalls" DataTextField="H_NAME" DataValueField="H_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" AppendDataBoundItems="true">
-                        <asp:ListItem Text="Select hall" Value="" />
-                     </asp:DropDownList>
+                        <asp:Label ID="lblShowTime" runat="server"
+                            Text="Show Time:"
+                            AssociatedControlID="txtShowTime"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtShowTime" runat="server" TextMode="Time"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                     <asp:Label ID="lblShowDate" runat="server" Text="Show Date:" AssociatedControlID="txtShowDate" CssClass="font-medium md:col-span-1" />
-                     <asp:TextBox ID="txtShowDate" runat="server" TextMode="Date" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" />
+                        <asp:Label ID="lblPrice" runat="server"
+                            Text="Price:"
+                            AssociatedControlID="txtPrice"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtPrice" runat="server" TextMode="Number"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                     <asp:Label ID="lblShowTime" runat="server" Text="Show Time:" AssociatedControlID="txtShowTime" CssClass="font-medium md:col-span-1" />
-                     <asp:TextBox ID="txtShowTime" runat="server" TextMode="Time" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" />
+                        <asp:Label ID="lblType" runat="server"
+                            Text="Type:"
+                            AssociatedControlID="txtType"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtType" runat="server"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                     <asp:Label ID="lblPrice" runat="server" Text="Price:" AssociatedControlID="txtPrice" CssClass="font-medium md:col-span-1" />
-                     <asp:TextBox ID="txtPrice" runat="server" TextMode="Number" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" />
-
-                     <asp:Label ID="lblType" runat="server" Text="Type:" AssociatedControlID="txtType" CssClass="font-medium md:col-span-1" />
-                     <asp:TextBox ID="txtType" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2" />
-
-                     <div class="md:col-span-3 text-center">
-                         <asp:Button ID="btnAddShow" runat="server" CssClass="px-3 py-1 text-sm rounded-md" Text="Add Show" OnClick="AddShow_Click" Style="background:var(--gold); color:#000; border:none; display:inline-block;" />
-                     </div>
-                 </div>
-             </asp:Panel>
-         </div>
-     </div>
+                        <div class="col-span-2 flex justify-center mt-4">
+                            <asp:Button ID="btnAddShow" runat="server"
+                                Text="Add Show"
+                                OnClick="AddShow_Click"
+                                CssClass="px-4 py-1 text-sm rounded-md"
+                                Style="background:var(--gold); color:#000; border:none;" />
+                        </div>
+                    </div>
+                </div>
+            </asp:Panel>
+        </div>
+    </div>
 
         <div class="max-w-6xl mx-auto my-6 font-sans">
             <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="SW_ID" DataSourceID="SqlDataSource1" CssClass="min-w-full table-auto" PageSize="10" HeaderStyle-CssClass="bg-yellow-400 text-black font-bold text-sm text-left" RowStyle-CssClass="text-white align-top" AlternatingRowStyle-CssClass="bg-black/5 text-white align-top" EditRowStyle-CssClass="bg-black text-white">
@@ -80,11 +108,8 @@
                      </UpdateParameters>
                  </asp:SqlDataSource>
 
-                <!-- DataSource for Movies (used by ddlMovie) -->
                 <asp:SqlDataSource ID="SqlDataSourceMovies" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" SelectCommand="SELECT &quot;MV_ID&quot;, &quot;MV_TITLE&quot; FROM &quot;MOVIES&quot; ORDER BY &quot;MV_ID&quot;" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>"></asp:SqlDataSource>
-
-                <!-- DataSource for Halls (used by ddlHallID) -->
                 <asp:SqlDataSource ID="SqlDataSourceHalls" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" SelectCommand="SELECT &quot;H_ID&quot;, &quot;H_NAME&quot; FROM &quot;HALLS&quot; ORDER BY &quot;H_ID&quot;" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>"></asp:SqlDataSource>
-         </div>
-</main>
+          </div>
+ </main>
 </asp:Content>

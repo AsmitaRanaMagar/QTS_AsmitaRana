@@ -3,63 +3,75 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
         <h2 id="title">&nbsp;</h2>
-
-        <style>
-            .custom-select {
-                background-color: transparent !important;
-                color: #ffffff !important;
-                border: 1px solid #ffffff !important;
-                border-radius: .375rem !important; /* rounded-md */
-                padding: .25rem .5rem !important;
-            }
-            .custom-select option {
-                background-color: #000000 !important;
-                color: #ffffff !important;
-            }
-            /* For WebKit browsers try to keep the dropdown arrow visible */
-            .custom-select::-ms-expand { display: block; }
-        </style>
-
-    <!-- Add ticket panel -->
     <div class="max-w-xl mx-auto my-6 font-sans">
         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
+            <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">
+                Add New Ticket
+            </h3>
             <asp:Panel ID="pnlAdd" runat="server">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center text-sm">
+                <div class="flex justify-center">
+                    <div class="grid grid-cols-[120px_1fr] gap-x-3 gap-y-3 text-sm w-full max-w-md">
+                        <asp:Label ID="lblTicketID" runat="server"
+                            Text="Ticket ID:"
+                            AssociatedControlID="txtTicketID"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtTicketID" runat="server"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1"
+                            required="required" />
 
-                    <h3 class="text-lg font-semibold mb-3 text-yellow-400 md:col-span-2 text-center">Add New Ticket</h3>
+                        <asp:Label ID="lblShowID" runat="server"
+                            Text="Show:"
+                            AssociatedControlID="DropDownList1"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSourceShows" DataTextField="SW_ID" DataValueField="SW_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" AppendDataBoundItems="true" AutoPostBack="False" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                            <asp:ListItem Text="Select show" Value="" />
+                        </asp:DropDownList>
 
-                    <asp:Label ID="lblTicketID" runat="server" Text="Ticket ID:" AssociatedControlID="txtTicketID" CssClass="font-medium md:col-span-1" />
-                    <asp:TextBox ID="txtTicketID" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-1" required="required" />
+                        <asp:Label ID="lblCustomerID" runat="server"
+                            Text="Customer:"
+                            AssociatedControlID="ddlCustomerID"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:DropDownList ID="ddlCustomerID" runat="server" DataSourceID="SqlDataSourceCust" DataTextField="CUS_NAME" DataValueField="CUS_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" AppendDataBoundItems="true">
+                            <asp:ListItem Text="Select customer" Value="" />
+                        </asp:DropDownList>
 
-                    <asp:Label ID="lblShowID" runat="server" Text="Show:" AssociatedControlID="DropDownList1" CssClass="font-medium md:col-span-1" />
-                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSourceShows" DataTextField="SW_ID" DataValueField="SW_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-1 custom-select" AppendDataBoundItems="true" AutoPostBack="False" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
-                        <asp:ListItem Text="Select show" Value="" />
-                    </asp:DropDownList>
+                        <asp:Label ID="lblDate" runat="server"
+                            Text="Ticket Date:"
+                            AssociatedControlID="txtDate"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtDate" runat="server" TextMode="Date"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1"
+                            required="required" />
 
-                    <asp:Label ID="lblCustomerID" runat="server" Text="Customer:" AssociatedControlID="ddlCustomerID" CssClass="font-medium md:col-span-1" />
-                    <asp:DropDownList ID="ddlCustomerID" runat="server" DataSourceID="SqlDataSourceCust" DataTextField="CUS_NAME" DataValueField="CUS_ID" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-1 custom-select" AppendDataBoundItems="true">
-                        <asp:ListItem Text="Select customer" Value="" />
-                    </asp:DropDownList>
+                        <asp:Label ID="lblQuantity" runat="server"
+                            Text="Quantity:"
+                            AssociatedControlID="txtQuantity"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtQuantity" runat="server" TextMode="Number"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                    <asp:Label ID="lblDate" runat="server" Text="Ticket Date:" AssociatedControlID="txtDate" CssClass="font-medium md:col-span-1" />
-                    <asp:TextBox ID="txtDate" runat="server" TextMode="Date" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-1" required="required" />
+                        <asp:Label ID="lblStatus" runat="server"
+                            Text="Status:"
+                            AssociatedControlID="txtStatus"
+                            CssClass="font-medium leading-none self-center text-right" />
+                        <asp:TextBox ID="txtStatus" runat="server"
+                            CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                    <asp:Label ID="lblQuantity" runat="server" Text="Quantity:" AssociatedControlID="txtQuantity" CssClass="font-medium md:col-span-1" />
-                    <asp:TextBox ID="txtQuantity" runat="server" TextMode="Number" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-1" />
-
-                    <asp:Label ID="lblStatus" runat="server" Text="Status:" AssociatedControlID="txtStatus" CssClass="font-medium md:col-span-1" />
-                    <asp:TextBox ID="txtStatus" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-1" />
-
-                    <div class="md:col-span-2 text-center">
-                        <asp:Button ID="btnAddTicket" runat="server" CssClass="px-3 py-1 text-sm rounded-md" Text="Add Ticket" OnClick="AddTicket_Click" Style="background:var(--gold); color:#000; border:none; display:inline-block;" />
+                        <div class="col-span-2 flex justify-center mt-4">
+                            <asp:Button ID="btnAddTicket" runat="server"
+                                Text="Add Ticket"
+                                OnClick="AddTicket_Click"
+                                CssClass="px-4 py-1 text-sm rounded-md"
+                                Style="background:var(--gold); color:#000; border:none;" />
+                        </div>
+                        <div class="col-span-2 mt-2">
+                            <asp:Label ID="lblTicketError" runat="server" ForeColor="#ff6b6b" CssClass="text-sm" Style="display:none"></asp:Label>
+                        </div>
                     </div>
-                    <div class="md:col-span-3 md:col-start-1 mt-2">
-                        <asp:Label ID="lblTicketError" runat="server" ForeColor="#ff6b6b" CssClass="text-sm" Style="display:none"></asp:Label>
-                    </div>
-                 </div>
-             </asp:Panel>
-         </div>
-     </div>
+                </div>
+            </asp:Panel>
+        </div>
+    </div>
 
     <!-- Filter panel: User ID + Customer details (fixed last 6 months) -->
     <div class="max-w-6xl mx-auto my-6 font-sans">
