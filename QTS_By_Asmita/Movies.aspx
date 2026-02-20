@@ -4,7 +4,8 @@
     <div class="max-w-xl mx-auto my-6 font-sans">
         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
             <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">
-                Add New Movie
+                Add Movie
+                
             </h3>
             <asp:Panel ID="pnlAdd" runat="server">
                 <div class="flex justify-center">
