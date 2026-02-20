@@ -7,14 +7,12 @@ namespace QTS_By_Asmita
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void AddMovie_Click(object sender, EventArgs e)
         {
             if (SqlDataSource1 != null)
             {
-                // match SqlDataSource parameter names
                 SqlDataSource1.InsertParameters["MOVIE_ID"].DefaultValue = txtMovieID.Text.Trim();
                 SqlDataSource1.InsertParameters["MOVIE_TITLE"].DefaultValue = txtTitle.Text.Trim();
                 SqlDataSource1.InsertParameters["GENRE"].DefaultValue = txtGenre.Text.Trim();

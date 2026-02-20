@@ -86,12 +86,8 @@
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceCust" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT &quot;CUS_ID&quot;, &quot;CUS_NAME&quot; FROM &quot;CUSTOMERS&quot; ORDER BY &quot;CUS_NAME&quot;">
                     </asp:SqlDataSource>
-
-                    <!-- DataSource for Shows (used by DropDownList1) -->
                     <asp:SqlDataSource ID="SqlDataSourceShows" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT &quot;SW_ID&quot; FROM &quot;SHOWS&quot; ORDER BY &quot;SW_ID&quot;">
                     </asp:SqlDataSource>
-
-                    <!-- helpers to validate foreign keys server-side -->
                     <asp:SqlDataSource ID="SqlDataSourceCheckShow" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;SHOWS&quot; WHERE &quot;SW_ID&quot; = :SW_ID">
                         <SelectParameters>
                             <asp:Parameter Name="SW_ID" Type="String" />
@@ -102,24 +98,23 @@
                             <asp:Parameter Name="CUS_ID" Type="String" />
                         </SelectParameters>
                     </asp:SqlDataSource>
-
-                    <!-- Customer details -->
                     <div class="md:col-span-4">&nbsp;</div>
                  </div>
              </asp:Panel>
         </div>
     </div>
     <div class="max-w-6xl mx-auto my-6 font-sans">
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="TK_ID" DataSourceID="SqlDataSource1" CssClass="min-w-full table-auto" HeaderStyle-CssClass="bg-yellow-400 text-black font-bold text-sm text-left" RowStyle-CssClass="text-white align-top" AlternatingRowStyle-CssClass="bg-black/5 text-white align-top" EditRowStyle-CssClass="bg-black text-white">
+        <asp:GridView ID="GridView1" runat="server" Caption="Tickets" CaptionStyle-CssClass="text-yellow-400 font-bold text-lg mb-2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="TK_ID" DataSourceID="SqlDataSource1" CssClass="min-w-full table-auto" HeaderStyle-CssClass="bg-yellow-400 text-black font-bold text-sm text-left" RowStyle-CssClass="text-white align-top" AlternatingRowStyle-CssClass="bg-black/5 text-white align-top" EditRowStyle-CssClass="bg-black text-white" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
 <AlternatingRowStyle CssClass="bg-black/5 text-white align-top"></AlternatingRowStyle>
             <Columns>
-                <asp:BoundField DataField="TK_ID" HeaderText="TK_ID" ReadOnly="True" SortExpression="TK_ID" />
-                <asp:BoundField DataField="SW_ID" HeaderText="SW_ID" SortExpression="SW_ID" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:BoundField DataField="TK_ID" HeaderText="Ticket ID" ReadOnly="True" SortExpression="TK_ID" />
+                <asp:BoundField DataField="SW_ID" HeaderText="Show ID" SortExpression="SW_ID" />
                 <asp:BoundField DataField="CUS_ID" HeaderText="Customer ID" SortExpression="CUS_ID" />
-                <asp:BoundField DataField="TK_DATE" HeaderText="TK_DATE" SortExpression="TK_DATE" />
-                <asp:BoundField DataField="TK_STATUS" HeaderText="TK_STATUS" SortExpression="TK_STATUS" />
-                <asp:BoundField DataField="TK_BOOKED_AT" HeaderText="TK_BOOKED_AT" SortExpression="TK_BOOKED_AT" />
-                <asp:BoundField DataField="TK_QUANTITY" HeaderText="TK_QUANTITY" SortExpression="TK_QUANTITY" />
+                <asp:BoundField DataField="TK_DATE" HeaderText="Date" SortExpression="TK_DATE" />
+                <asp:BoundField DataField="TK_STATUS" HeaderText="Status" SortExpression="TK_STATUS" />
+                <asp:BoundField DataField="TK_BOOKED_AT" HeaderText="Booked At" SortExpression="TK_BOOKED_AT" />
+                <asp:BoundField DataField="TK_QUANTITY" HeaderText="Quantity" SortExpression="TK_QUANTITY" />
             </Columns>
 
 <EditRowStyle CssClass="bg-black text-white"></EditRowStyle>
@@ -183,6 +178,5 @@
                     </UpdateParameters>
                 </asp:SqlDataSource>
     </div>
-
 </main>
 </asp:Content>

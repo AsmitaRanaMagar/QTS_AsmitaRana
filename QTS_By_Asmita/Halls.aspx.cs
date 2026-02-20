@@ -7,7 +7,6 @@ namespace QTS_By_Asmita
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void AddHall_Click(object sender, EventArgs e)
@@ -15,7 +14,6 @@ namespace QTS_By_Asmita
             if (SqlDataSource1 != null)
             {
                 SqlDataSource1.InsertParameters["H_ID"].DefaultValue = txtHallID.Text.Trim();
-                // use dropdown selected value for theatre id
                 if (ddlTheaterID != null)
                 {
                     SqlDataSource1.InsertParameters["THR_ID"].DefaultValue = ddlTheaterID.SelectedValue;
@@ -29,7 +27,6 @@ namespace QTS_By_Asmita
             GridView1.DataBind();
 
             txtHallID.Text = string.Empty;
-            // clear dropdown selection instead of text field
             if (ddlTheaterID != null) ddlTheaterID.SelectedIndex = 0;
             txtHallName.Text = string.Empty;
             txtCapacity.Text = string.Empty;

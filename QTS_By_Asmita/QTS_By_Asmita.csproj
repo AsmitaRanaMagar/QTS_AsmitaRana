@@ -101,7 +101,6 @@
   <ItemGroup>
     <Content Include="Assets\Images\herosection.jpg" />
     <Content Include="Assets\Images\logo.png" />
-    <Content Include="sql\create_movies_table.sql" />
     <Content Include="Tickets.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Movies.aspx" />

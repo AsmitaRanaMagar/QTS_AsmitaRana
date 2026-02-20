@@ -5,10 +5,6 @@ namespace QTS_By_Asmita
 {
     public partial class Customer : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-        }
-
         protected void AddCustomer_Click(object sender, EventArgs e)
         {
             if (SqlDataSource1 != null)
@@ -25,6 +21,7 @@ namespace QTS_By_Asmita
 
             SqlDataSource1.Insert();
             GridView1.DataBind();
+
             txtCustomerID.Text = string.Empty;
             txtName.Text = string.Empty;
             txtEmail.Text = string.Empty;
@@ -33,6 +30,7 @@ namespace QTS_By_Asmita
             ddlGender.SelectedIndex = 0;
             txtAge.Text = string.Empty;
         }
+
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }

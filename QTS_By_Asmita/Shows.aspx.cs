@@ -16,7 +16,6 @@ namespace QTS_By_Asmita
             {
                 SqlDataSource1.InsertParameters["SW_ID"].DefaultValue = txtShowID.Text.Trim();
 
-                // movie: prefer ddlMovie, fallback to textbox if present
                 if (ddlMovie != null)
                 {
                     SqlDataSource1.InsertParameters["MV_ID"].DefaultValue = ddlMovie.SelectedValue;
@@ -26,7 +25,6 @@ namespace QTS_By_Asmita
                     SqlDataSource1.InsertParameters["MV_ID"].DefaultValue = movieTextbox.Text.Trim();
                 }
 
-                // hall: prefer ddlHallID, fallback to textbox if present
                 if (ddlHallID != null)
                 {
                     SqlDataSource1.InsertParameters["H_ID"].DefaultValue = ddlHallID.SelectedValue;
@@ -38,7 +36,6 @@ namespace QTS_By_Asmita
 
                 SqlDataSource1.InsertParameters["SW_DATE"].DefaultValue = txtShowDate.Text.Trim();
                 SqlDataSource1.InsertParameters["SW_TIME"].DefaultValue = txtShowTime.Text.Trim();
-                // set price parameter from txtPrice
                 if (SqlDataSource1.InsertParameters["SW_PRICE"] != null)
                     SqlDataSource1.InsertParameters["SW_PRICE"].DefaultValue = txtPrice.Text.Trim();
                 SqlDataSource1.InsertParameters["SW_TYPE"].DefaultValue = txtType.Text.Trim();

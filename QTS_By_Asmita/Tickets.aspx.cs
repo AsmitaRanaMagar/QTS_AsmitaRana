@@ -26,7 +26,6 @@ namespace QTS_By_Asmita
                 if (insertParams["TK_ID"] != null)
                     insertParams["TK_ID"].DefaultValue = txtTicketID?.Text.Trim() ?? string.Empty;
 
-                // use show dropdown selected value, fallback to textbox if present
                 if (insertParams["SW_ID"] != null)
                 {
                     if (DropDownList1 != null)
@@ -39,7 +38,6 @@ namespace QTS_By_Asmita
                     }
                 }
 
-                // use dropdown for customer id instead of removed text input
                 if (insertParams["CUS_ID"] != null)
                 {
                     if (ddlCustomerID != null)
@@ -102,6 +100,11 @@ namespace QTS_By_Asmita
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
