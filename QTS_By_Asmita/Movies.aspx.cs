@@ -33,5 +33,49 @@ namespace QTS_By_Asmita
             txtDuration.Text = string.Empty;
             txtDesc.Text = string.Empty;
         }
+
+        protected void DdlMovieSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Rebind repeater when selection changes
+            rptTopHalls?.DataBind();
+
+            // Show/hide no-results label
+            if (FindControl("lblNoTopHalls") is System.Web.UI.WebControls.Label noLabel)
+            {
+                noLabel.Visible = (rptTopHalls == null) || (rptTopHalls.Items.Count == 0);
+            }
+        }
+
+        protected void SqlDataSourceOccupancy_Selected(object sender, System.Web.UI.WebControls.SqlDataSourceStatusEventArgs e)
+        {
+            // Use lblNoTopHalls to display errors or no-results
+            var noLabel = FindControl("lblNoTopHalls") as System.Web.UI.WebControls.Label;
+
+            if (e.Exception != null)
+            {
+                if (noLabel != null)
+                {
+                    noLabel.Text = "Error loading occupancy: " + e.Exception.Message;
+                    noLabel.Visible = true;
+                }
+                e.ExceptionHandled = true;
+                return;
+            }
+
+            // If affected rows available, use it; otherwise check repeater items after binding
+            if (noLabel != null)
+            {
+                if (e.AffectedRows > 0)
+                {
+                    noLabel.Visible = false;
+                }
+                else
+                {
+                    // If AffectedRows unknown (-1), rely on repeater item count
+                    noLabel.Visible = (rptTopHalls == null) || (rptTopHalls.Items.Count == 0);
+                    noLabel.Text = "No halls found for selected movie";
+                }
+            }
+        }
     }
 }

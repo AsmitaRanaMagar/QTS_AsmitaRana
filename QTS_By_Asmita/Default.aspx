@@ -1,194 +1,154 @@
 ﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="QTS_By_Asmita.Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <style>
-        .hero {
-            position: relative;
-            overflow: hidden;
-            min-height: 65vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            border-radius: 12px;
-            padding: 3rem 1.5rem;
-            margin-top: 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            background: #000; /* fallback */
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            /* use a mild dark gradient over the image and reduce blur so image is more visible */
-            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('Assets/Images/herosection.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            filter: blur(4px) saturate(0.95);
-            transform: scale(1.02);
-            z-index: 1;
-        }
-        .hero-inner { position: relative; z-index: 2; max-width: 900px; text-align: center; padding: 1rem; }
-        .hero h1 { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; margin:0; color:#fff }
-        .hero p { color: rgba(255,255,255,0.92); margin-top: .75rem; font-size: 1.05rem; }
-        .cta { margin-top: 1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center; }
-        /* Primary button */
-        .btn-primary-custom,
-        .btn-primary-custom:visited {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            background: linear-gradient(180deg, #F0C95A 0%, #D4AF37 100%);
-            color: #07120b; /* dark text for contrast */
-            padding: .65rem 1.1rem;
-            border-radius: .6rem;
-            font-weight: 700;
-            box-shadow: 0 8px 22px rgba(212,175,55,0.14), inset 0 -4px 8px rgba(0,0,0,0.12);
-            border: 0;
-            text-decoration: none;
-            transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
-            cursor: pointer;
-        }
-        .btn-primary-custom:hover,
-        .btn-primary-custom:focus {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 40px rgba(212,175,55,0.18), inset 0 -3px 6px rgba(0,0,0,0.08);
-            outline: none;
-            text-decoration: none;
-            opacity: 0.98;
-        }
-        .btn-primary-custom:active {
-            transform: translateY(0);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.5);
-        }
-
-        /* Outline button */
-        .btn-outline-custom,
-        .btn-outline-custom:visited {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            background: rgba(0,0,0,0.35);
-            color: #D4AF37;
-            padding: .55rem 1rem;
-            border-radius: .6rem;
-            border: 1px solid rgba(212,175,55,0.28);
-            font-weight: 600;
-            text-decoration: none;
-            transition: background .18s ease, transform .18s ease, color .18s ease, box-shadow .18s ease;
-            cursor: pointer;
-        }
-        .btn-outline-custom:hover,
-        .btn-outline-custom:focus {
-            background: linear-gradient(180deg, rgba(212,175,55,0.12), rgba(212,175,55,0.06));
-            color: #000;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(212,175,55,0.08);
-            outline: none;
-        }
-        .btn-outline-custom:active {
-            transform: translateY(0);
-            box-shadow: none;
-        }
-
-        /* Ensure anchors don't get default link styles inside hero */
-        .hero a { text-decoration: none; }
-
-        .feature { background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 8px; }
-        .movie-card { background: rgba(255,255,255,0.02); border-radius: 8px; overflow: hidden; }
-        .movie-card .meta { padding: .75rem; }
-        @media (min-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .hero { min-height: 72vh }
-            /* keep text centered on larger viewports for balanced composition */
-            .hero-inner { text-align: center; transform: none; }
-            .cta { justify-content: center }
-        }
-    </style>
-
-    <section class="hero mx-auto max-w-7xl rounded-lg">
-        <div class="hero-inner">
-            <h1 class="home-title">Welcome to Quick Cinema Hall</h1>
-            <p style="margin-top: .75rem; font-size: 1.05rem; color: rgba(255,255,255,0.92);">
-                Experience movies the way they were meant to be seen — comfortable halls, crystal-clear sound and seamless booking. Find showtimes, pick seats and get instant tickets.
-            </p>
-            <div class="cta">
-                <asp:HyperLink runat="server" NavigateUrl="~/Movies" CssClass="btn-primary-custom">Browse Movies</asp:HyperLink>
-                <asp:HyperLink runat="server" NavigateUrl="~/Shows" CssClass="btn-outline-custom">View Shows</asp:HyperLink>
-                <asp:Button ID="btnGetStarted" runat="server" Text="Get Started" CssClass="btn-primary-custom" PostBackUrl="~/Customer.aspx" />
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Totals row -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-4 bg-gradient-to-br from-gray-900 to-black rounded-lg border border-gray-800 shadow-sm text-center">
+                <div class="flex items-center justify-center space-x-2">
+                    <!-- users SVG -->
+                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a4 4 0 0 0-4-4h-1M9 20H4v-2a4 4 0 0 1 4-4h1m1-7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM21 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path></svg>
+                    <div class="text-sm text-gray-400">Total Customers</div>
+                </div>
+                <div class="mt-2 text-3xl font-bold text-white"><asp:Label ID="lblTotalCustomers" runat="server" Text="0" /></div>
             </div>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto mt-10 px-2">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="feature">
-                <h3 class="text-lg font-bold gold-text">Easy Booking</h3>
-                <p class="text-sm mt-2">Select seats, choose shows and pay securely — all in a few clicks.</p>
+            <div class="p-4 bg-gradient-to-br from-gray-900 to-black rounded-lg border border-gray-800 shadow-sm text-center">
+                <div class="flex items-center justify-center space-x-2">
+                    <!-- film SVG -->
+                    <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 3h14a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v2h2V5H6zm10 0v2h2V5h-2zM6 9v2h2V9H6zm10 0v2h2V9h-2zM6 13v2h2v-2H6zm10 0v2h2v-2h-2z"/></svg>
+                    <div class="text-sm text-gray-400">Total Movies</div>
+                </div>
+                <div class="mt-2 text-3xl font-bold text-white"><asp:Label ID="lblTotalMovies" runat="server" Text="0" /></div>
             </div>
-            <div class="feature">
-                <h3 class="text-lg font-bold gold-text">Best Halls</h3>
-                <p class="text-sm mt-2">We list top halls with comfortable seating and excellent sound and visuals.</p>
+            <div class="p-4 bg-gradient-to-br from-gray-900 to-black rounded-lg border border-gray-800 shadow-sm text-center">
+                <div class="flex items-center justify-center space-x-2">
+                    <!-- calendar/show SVG -->
+                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"></path></svg>
+                    <div class="text-sm text-gray-400">Active Shows (Today)</div>
+                </div>
+                <div class="mt-2 text-3xl font-bold text-white"><asp:Label ID="lblTotalShowsToday" runat="server" Text="0" /></div>
             </div>
-            <div class="feature">
-                <h3 class="text-lg font-bold gold-text">Exclusive Offers</h3>
-                <p class="text-sm mt-2">Get discounts and special combos when you book through our portal.</p>
+        </section>
+
+        <!-- Data sources for counts -->
+        <asp:SqlDataSource ID="sdsCustomersCount" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;CUSTOMERS&quot;"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="sdsMoviesCount" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;MOVIES&quot;"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="sdsShowsTodayCount" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;SHOWS&quot; WHERE TRUNC(&quot;SW_DATE&quot;) = TRUNC(SYSDATE)"></asp:SqlDataSource>
+
+        <!-- Quick Actions -->
+        <section class="mt-8">
+            <h2 class="text-lg font-semibold text-yellow-400">Quick Actions</h2>
+            <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <asp:HyperLink runat="server" NavigateUrl="~/Movies" CssClass="block p-4 bg-gray-900 border border-gray-800 rounded-lg hover:shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <!-- search film SVG -->
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"></path></svg>
+                        <div>
+                            <div class="text-sm text-gray-400">Movies</div>
+                            <div class="mt-1 text-white font-bold">Browse</div>
+                        </div>
+                    </div>
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Shows" CssClass="block p-4 bg-gray-900 border border-gray-800 rounded-lg hover:shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6M5 7h14"></path></svg>
+                        <div>
+                            <div class="text-sm text-gray-400">Shows</div>
+                            <div class="mt-1 text-white font-bold">Manage</div>
+                        </div>
+                    </div>
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Halls" CssClass="block p-4 bg-gray-900 border border-gray-800 rounded-lg hover:shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7h18M6 7v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7"></path></svg>
+                        <div>
+                            <div class="text-sm text-gray-400">Halls</div>
+                            <div class="mt-1 text-white font-bold">Inventory</div>
+                        </div>
+                    </div>
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Tickets" CssClass="block p-4 bg-gray-900 border border-gray-800 rounded-lg hover:shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 6v12M17 6v12"></path></svg>
+                        <div>
+                            <div class="text-sm text-gray-400">Tickets</div>
+                            <div class="mt-1 text-white font-bold">Sales</div>
+                        </div>
+                    </div>
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Customer" CssClass="block p-4 bg-gray-900 border border-gray-800 rounded-lg hover:shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11c1.657 0 3-1.567 3-3.5S17.657 4 16 4s-3 1.567-3 3.5S14.343 11 16 11zM8 11c1.657 0 3-1.567 3-3.5S9.657 4 8 4 5 5.567 5 7.5 6.343 11 8 11zM3 20c0-3.333 2.667-6 6-6h6c3.333 0 6 2.667 6 6"></path></svg>
+                        <div>
+                            <div class="text-sm text-gray-400">Customers</div>
+                            <div class="mt-1 text-white font-bold">Users</div>
+                        </div>
+                    </div>
+                </asp:HyperLink>
+
+                <asp:HyperLink runat="server" NavigateUrl="~/Halls" CssClass="block p-4 bg-gray-900 border border-gray-800 rounded-lg hover:shadow-lg">
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h18v18H3z"></path></svg>
+                        <div>
+                            <div class="text-sm text-gray-400">Analytics</div>
+                            <div class="mt-1 text-white font-bold">Top Halls</div>
+                        </div>
+                    </div>
+                </asp:HyperLink>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="max-w-7xl mx-auto mt-12 px-2">
-        <div class="flex items-center justify-between mb-4">
-            <h2 class="text-2xl font-bold">Now Showing</h2>
-            <asp:HyperLink runat="server" NavigateUrl="~/Movies" CssClass="gold-text">See all movies</asp:HyperLink>
-        </div>
+        <!-- Locations and Top Movies -->
+        <section class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Locations card -->
+            <div class="lg:col-span-1 bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-yellow-400 font-semibold">Locations</h3>
+                    <div class="text-sm text-green-400">+4.34%</div>
+                </div>
+                <div class="mt-4 space-y-3">
+                    <asp:Repeater ID="rptHallsTheatre" runat="server" DataSourceID="sdsHallsForT010">
+                        <ItemTemplate>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-3 h-3 rounded-full" style='background-color:<%# Container.ItemIndex==0 ? "#F97316" : (Container.ItemIndex==1 ? "#FDE047" : (Container.ItemIndex==2 ? "#60A5FA" : "#34D399")) %>'></span>
+                                    <div class="text-sm text-white"><%# Eval("H_NAME") %></div>
+                                </div>
+                                <div class="text-sm text-gray-300"><%# Eval("H_CAPACITY") %></div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <!-- Example static movie cards. Replace with dynamic data later. -->
-            <div class="movie-card">
-                <img src="Assets/Images/movie1.jpg" alt="Movie 1" />
-                <div class="meta">
-                    <div class="font-bold">Sample Movie 1</div>
-                    <div class="text-sm text-gray-400">2h 10m · Action</div>
+                    <asp:SqlDataSource ID="sdsHallsForT010" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT &quot;H_ID&quot;, &quot;H_NAME&quot;, &quot;H_CAPACITY&quot; FROM &quot;HALLS&quot; WHERE &quot;THR_ID&quot; = 'T010' ORDER BY &quot;H_NAME&quot;"></asp:SqlDataSource>
                 </div>
             </div>
 
-            <div class="movie-card">
-                <img src="Assets/Images/movie2.jpg" alt="Movie 2" />
-                <div class="meta">
-                    <div class="font-bold">Sample Movie 2</div>
-                    <div class="text-sm text-gray-400">1h 50m · Drama</div>
+            <!-- Top movies -->
+            <div class="lg:col-span-2 bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 shadow-sm">
+                <h3 class="text-yellow-400 font-semibold">Top Movies</h3>
+                <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <asp:Repeater ID="rptTopMovies" runat="server" DataSourceID="sdsTopMovies">
+                        <ItemTemplate>
+                            <div class="p-4 bg-gray-800 rounded flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-10 h-10 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 10h8v2H8v-2zm0 4h5v2H8v-2z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold"><%# Eval("MV_TITLE") %></div>
+                                    <div class="text-xs text-gray-400">Shows: <%# Eval("SHOW_COUNT") %></div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <asp:SqlDataSource ID="sdsTopMovies" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT * FROM (SELECT M.&quot;MV_ID&quot; AS MV_ID, M.&quot;MV_TITLE&quot; AS MV_TITLE, COUNT(S.&quot;SW_ID&quot;) AS SHOW_COUNT FROM &quot;MOVIES&quot; M JOIN &quot;SHOWS&quot; S ON S.&quot;MV_ID&quot; = M.&quot;MV_ID&quot; GROUP BY M.&quot;MV_ID&quot;, M.&quot;MV_TITLE&quot; ORDER BY SHOW_COUNT DESC) WHERE ROWNUM &lt;= 5"></asp:SqlDataSource>
                 </div>
             </div>
+        </section>
 
-            <div class="movie-card">
-                <img src="Assets/Images/movie3.jpg" alt="Movie 3" />
-                <div class="meta">
-                    <div class="font-bold">Sample Movie 3</div>
-                    <div class="text-sm text-gray-400">2h 5m · Comedy</div>
-                </div>
-            </div>
-
-            <div class="movie-card">
-                <img src="Assets/Images/movie4.jpg" alt="Movie 4" />
-                <div class="meta">
-                    <div class="font-bold">Sample Movie 4</div>
-                    <div class="text-sm text-gray-400">1h 45m · Romance</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-7xl mx-auto mt-12 mb-12 px-2 text-center">
-        <h3 class="text-xl font-bold">Ready to book?</h3>
-        <p class="mt-2 text-gray-300">Create an account or sign in to manage your bookings and view tickets.</p>
-        <div class="mt-4 flex items-center justify-center gap-3">
-            <asp:HyperLink runat="server" NavigateUrl="~/Customer" CssClass="btn-primary-custom">Sign up / Sign in</asp:HyperLink>
-            <asp:HyperLink runat="server" NavigateUrl="~/Tickets" CssClass="btn-outline-custom">My Tickets</asp:HyperLink>
-        </div>
-    </section>
-
+    </main>
 </asp:Content>

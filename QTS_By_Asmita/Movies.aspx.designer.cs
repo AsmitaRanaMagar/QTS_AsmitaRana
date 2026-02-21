@@ -159,21 +159,38 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.Button btnAddMovie;
 
         /// <summary>
+        /// ddlMovieSelect control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMovieSelect;
+
+        /// <summary>
+        /// rptTopHalls control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Repeater rptTopHalls;
+
+        /// <summary>
+        /// lblNoTopHalls control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblNoTopHalls;
+
+        /// <summary>
+        /// SqlDataSourceMovies control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceMovies;
+
+        /// <summary>
+        /// SqlDataSourceOccupancy control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceOccupancy;
+
+        /// <summary>
         /// GridView1 control.
         /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
         /// SqlDataSource1 control.
         /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }

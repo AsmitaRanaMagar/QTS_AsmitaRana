@@ -24,7 +24,6 @@
         </style>
         <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
     </head>
-    </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -189,7 +188,7 @@
             </div>
         </div>
         <div class="text-center gold-text text-xs mt-4">
-            © 2026 Quick Cinema Hall. All rights reserved.
+            © 2026 Quick Theatre System. All rights reserved.
         </div>
     </footer>
 

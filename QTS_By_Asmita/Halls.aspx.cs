@@ -32,5 +32,20 @@ namespace QTS_By_Asmita
             txtCapacity.Text = string.Empty;
             txtStatus.Text = string.Empty;
         }
+
+        public void DdlHallSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Use pattern matching to safely obtain selected value and check
+            if (ddlHallSelect?.SelectedValue is string selected && !string.IsNullOrEmpty(selected))
+            {
+                // GridViewShows has DataSourceID set to SqlDataSourceShowsSelect in markup
+                GridViewShows.DataBind();
+                GridViewShows.Visible = GridViewShows.Rows.Count > 0;
+            }
+            else
+            {
+                GridViewShows.Visible = false;
+            }
+        }
     }
 }

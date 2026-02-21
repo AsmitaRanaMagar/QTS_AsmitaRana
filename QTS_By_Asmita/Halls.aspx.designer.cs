@@ -123,12 +123,33 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.Button btnAddHall;
 
         /// <summary>
+        /// SqlDataSourceHallsSelect control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceHallsSelect;
+
+        /// <summary>
+        /// lblSelectHall control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblSelectHall;
+
+        /// <summary>
+        /// ddlHallSelect control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlHallSelect;
+
+        /// <summary>
+        /// GridViewShows control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.GridView GridViewShows;
+
+        /// <summary>
+        /// SqlDataSourceShowsSelect control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceShowsSelect;
+
+        /// <summary>
         /// GridView1 control.
         /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
