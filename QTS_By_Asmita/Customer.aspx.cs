@@ -7,6 +7,21 @@ namespace QTS_By_Asmita
     {
         protected void AddCustomer_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(txtAge.Text))
+            {
+                if (int.TryParse(txtAge.Text.Trim(), out var age))
+                {
+                    if (age < 18)
+                    {
+                        lblAgeWarning.Text = "Age must be at least 18 years old.";
+                        lblAgeWarning.Visible = true;
+                        return;
+                    }
+                }
+            }
+            lblAgeWarning.Text = string.Empty;
+            lblAgeWarning.Visible = false;
+
             if (SqlDataSource1 != null)
             {
                 SqlDataSource1.InsertParameters["CUS_ID"].DefaultValue = txtCustomerID.Text.Trim();

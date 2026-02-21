@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Data;
 
 namespace QTS_By_Asmita
 {
@@ -11,6 +12,36 @@ namespace QTS_By_Asmita
 
         protected void AddMovie_Click(object sender, EventArgs e)
         {
+            var newId = txtMovieID.Text?.Trim();
+            if (!string.IsNullOrEmpty(newId))
+            {
+                try
+                {
+                    var dv = SqlDataSource1.Select(DataSourceSelectArguments.Empty) as DataView;
+                    if (dv != null)
+                    {
+                        foreach (DataRowView row in dv)
+                        {
+                            var existing = Convert.ToString(row["MOVIE_ID"]);
+                            if (string.Equals(existing, newId, StringComparison.OrdinalIgnoreCase))
+                            {
+                                lblMovieWarning.Text = "Movie id already exists.";
+                                lblMovieWarning.Visible = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // if select fails, continue to attempt insert (optional: log)
+                }
+            }
+
+            // proceed with insert - hide any previous warning
+            lblMovieWarning.Text = string.Empty;
+            lblMovieWarning.Visible = false;
+
             if (SqlDataSource1 != null)
             {
                 SqlDataSource1.InsertParameters["MOVIE_ID"].DefaultValue = txtMovieID.Text.Trim();
@@ -76,6 +107,11 @@ namespace QTS_By_Asmita
                     noLabel.Text = "No halls found for selected movie";
                 }
             }
+        }
+
+        protected void rptTopHalls_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        {
+
         }
     }
 }

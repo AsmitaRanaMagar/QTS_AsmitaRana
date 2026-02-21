@@ -80,6 +80,10 @@
                         CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1"
                         required="required" />
 
+                    <div class="col-span-2 flex justify-center">
+                        <asp:Label ID="lblAgeWarning" runat="server" Text="" CssClass="text-sm text-red-500 text-center w-full max-w-md" Visible="false" Role="alert"></asp:Label>
+                    </div>
+
                     <div class="col-span-2 flex justify-center mt-4">
                         <asp:Button ID="btnAdd" runat="server"
                             Text="Add Customer"

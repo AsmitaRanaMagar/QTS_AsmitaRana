@@ -61,6 +61,10 @@
                         <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine"
                             CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 min-h-12" Rows="3" />
 
+                        <div class="col-span-2">
+                            <asp:Label ID="lblMovieWarning" runat="server" Text="" CssClass="text-sm text-red-500 text-center w-full max-w-md" Visible="false" Role="alert"></asp:Label>
+                        </div>
+
                         <div class="col-span-2 flex justify-center mt-4">
                             <asp:Button ID="btnAddMovie" runat="server"
                                 Text="Add Movie"
@@ -79,20 +83,20 @@
         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
             <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">Top 3 Halls by Occupancy for Selected Movie</h3>
             <div class="flex justify-center mb-4">
-                &nbsp;&nbsp;&nbsp;&nbsp; Select Movies:
+                &nbsp;&nbsp;&nbsp;&nbsp; Select Movies:&nbsp;&nbsp;
                 <asp:DropDownList ID="ddlMovieSelect" runat="server" AutoPostBack="True" CssClass="w-full max-w-md bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" OnSelectedIndexChanged="DdlMovieSelect_SelectedIndexChanged" DataSourceID="SqlDataSourceMovies" DataTextField="MV_TITLE" DataValueField="MV_ID">
                     <asp:ListItem Text="Select movie" Value="" />
                 </asp:DropDownList>
             </div>
 
             <!-- Repeater for top 3 halls -->
-            <asp:Repeater ID="rptTopHalls" runat="server" DataSourceID="SqlDataSourceOccupancy">
+            <asp:Repeater ID="rptTopHalls" runat="server" DataSourceID="SqlDataSourceOccupancy" OnItemCommand="rptTopHalls_ItemCommand">
                 <HeaderTemplate>
-                    <div class="grid grid-cols-1 gap-4 max-w-md mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
                 </HeaderTemplate>
                 <ItemTemplate>
-                    <div class="p-3 border border-yellow-400 rounded-md bg-black/40">
-                        <div class="text-sm text-yellow-400">Rank <%# Container.ItemIndex + 1 %></div>
+                    <div class="p-4 border border-yellow-400 rounded-md bg-black/40">
+                        <div class="text-sm text-yellow-400 font-semibold">Rank <%# Container.ItemIndex + 1 %></div>
                         <div class="mt-2 text-white text-sm"><strong>Theatre:</strong> <%# Eval("THR_NAME") %></div>
                         <div class="text-white text-sm"><strong>City:</strong> <%# Eval("THR_CITY") %></div>
                         <div class="text-white text-sm"><strong>Hall:</strong> <%# Eval("H_ID") %></div>
@@ -110,7 +114,7 @@
             </asp:SqlDataSource>
 
             <asp:SqlDataSource ID="SqlDataSourceOccupancy" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>"
-                SelectCommand="SELECT * FROM (SELECT h.&quot;H_ID&quot; AS &quot;H_ID&quot;, th.&quot;THR_NAME&quot; AS &quot;THR_NAME&quot;, th.&quot;THR_CITY&quot; AS &quot;THR_CITY&quot;, NVL(SUM(t.&quot;TK_QUANTITY&quot;),0) AS PAID_TICKETS, h.&quot;H_CAPACITY&quot; AS H_CAPACITY, CASE WHEN h.&quot;H_CAPACITY&quot; IS NULL OR h.&quot;H_CAPACITY&quot; = 0 THEN 0 ELSE (NVL(SUM(t.&quot;TK_QUANTITY&quot;),0) / h.&quot;H_CAPACITY&quot;) * 100 END AS OCCUPANCY_PCT FROM &quot;HALLS&quot; h JOIN &quot;THEATRES&quot; th ON h.&quot;THR_ID&quot; = th.&quot;THR_ID&quot; JOIN &quot;SHOWS&quot; s ON s.&quot;H_ID&quot; = h.&quot;H_ID&quot; LEFT JOIN &quot;TICKETS&quot; t ON t.&quot;SW_ID&quot; = s.&quot;SW_ID&quot; AND t.&quot;TK_STATUS&quot; = 'Paid' WHERE s.&quot;MV_ID&quot; = :MOVIE_ID GROUP BY h.&quot;H_ID&quot;, th.&quot;THR_NAME&quot;, th.&quot;THR_CITY&quot;, h.&quot;H_CAPACITY&quot; ORDER BY OCCUPANCY_PCT DESC) WHERE ROWNUM &lt;= 3"
+                SelectCommand="SELECT * FROM (SELECT h.&quot;H_ID&quot; AS &quot;H_ID&quot;, th.&quot;THR_NAME&quot; AS &quot;THR_NAME&quot;, th.&quot;THR_CITY&quot; AS &quot;THR_CITY&quot;, NVL(SUM(t.&quot;TK_QUANTITY&quot;),0) AS PAID_TICKETS, h.&quot;H_CAPACITY&quot; AS &quot;H_CAPACITY&quot;, CASE WHEN h.&quot;H_CAPACITY&quot; IS NULL OR h.&quot;H_CAPACITY&quot; = 0 THEN 0 ELSE (NVL(SUM(t.&quot;TK_QUANTITY&quot;),0) / h.&quot;H_CAPACITY&quot;) * 100 END AS OCCUPANCY_PCT FROM &quot;HALLS&quot; h JOIN &quot;THEATRES&quot; th ON h.&quot;THR_ID&quot; = th.&quot;THR_ID&quot; JOIN &quot;SHOWS&quot; s ON s.&quot;H_ID&quot; = h.&quot;H_ID&quot; LEFT JOIN &quot;TICKETS&quot; t ON t.&quot;SW_ID&quot; = s.&quot;SW_ID&quot; AND t.&quot;TK_STATUS&quot; = 'Paid' WHERE s.&quot;MV_ID&quot; = :MOVIE_ID GROUP BY h.&quot;H_ID&quot;, th.&quot;THR_NAME&quot;, th.&quot;THR_CITY&quot;, h.&quot;H_CAPACITY&quot; ORDER BY OCCUPANCY_PCT DESC) WHERE ROWNUM &lt;= 3"
                 OnSelected="SqlDataSourceOccupancy_Selected">
                 <SelectParameters>
                     <asp:ControlParameter Name="MOVIE_ID" ControlID="ddlMovieSelect" PropertyName="SelectedValue" Type="String" />

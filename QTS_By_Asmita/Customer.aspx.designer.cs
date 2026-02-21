@@ -150,6 +150,11 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.TextBox txtAge;
 
         /// <summary>
+        /// lblAgeWarning control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblAgeWarning;
+
+        /// <summary>
         /// btnAdd control.
         /// </summary>
         /// <remarks>
