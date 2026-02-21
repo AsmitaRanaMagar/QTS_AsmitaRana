@@ -42,6 +42,24 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.Label lblTotalShowsToday;
 
         /// <summary>
+        /// rptHallsTheatre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptHallsTheatre;
+
+        /// <summary>
+        /// rptTopMovies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptTopMovies;
+
+        /// <summary>
         /// sdsCustomersCount control.
         /// </summary>
         /// <remarks>
@@ -67,5 +85,23 @@ namespace QTS_By_Asmita
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sdsShowsTodayCount;
+
+        /// <summary>
+        /// sdsHallsForT010 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sdsHallsForT010;
+
+        /// <summary>
+        /// sdsTopMovies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sdsTopMovies;
     }
 }
