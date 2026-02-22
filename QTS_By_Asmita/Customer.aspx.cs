@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Data;
 
 namespace QTS_By_Asmita
 {
@@ -7,6 +8,30 @@ namespace QTS_By_Asmita
     {
         protected void AddCustomer_Click(object sender, EventArgs e)
         {
+            // Duplicate CUS_ID check
+            var newId = txtCustomerID.Text?.Trim();
+            if (!string.IsNullOrEmpty(newId))
+            {
+                try
+                {
+                    if (SqlDataSource1.Select(DataSourceSelectArguments.Empty) is DataView dv)
+                    {
+                        foreach (DataRowView row in dv)
+                        {
+                            var existing = Convert.ToString(row["CUS_ID"]);
+                            if (string.Equals(existing, newId, StringComparison.OrdinalIgnoreCase))
+                            {
+                                lblCustomerWarning.Text = "Customer id already exists.";
+                                lblCustomerWarning.Visible = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+
+            // Age validation: if provided and less than 18, show warning and do not insert
             if (!string.IsNullOrWhiteSpace(txtAge.Text))
             {
                 if (int.TryParse(txtAge.Text.Trim(), out var age))
@@ -19,8 +44,12 @@ namespace QTS_By_Asmita
                     }
                 }
             }
+
+            // hide warnings when valid
             lblAgeWarning.Text = string.Empty;
             lblAgeWarning.Visible = false;
+            lblCustomerWarning.Text = string.Empty;
+            lblCustomerWarning.Visible = false;
 
             if (SqlDataSource1 != null)
             {

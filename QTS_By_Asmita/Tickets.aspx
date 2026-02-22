@@ -57,15 +57,15 @@
                         <asp:TextBox ID="txtStatus" runat="server"
                             CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" />
 
-                        <div class="col-span-2 flex justify-center mt-4">
+                        <div class="col-span-2 flex justify-center mb-3">
+                            <asp:Label ID="lblTicketWarning" runat="server" Text="" CssClass="text-sm text-red-500 text-center w-full max-w-md" Visible="false" Role="alert"></asp:Label>
+                        </div>
+                        <div class="col-span-2 flex justify-center">
                             <asp:Button ID="btnAddTicket" runat="server"
                                 Text="Add Ticket"
                                 OnClick="AddTicket_Click"
                                 CssClass="px-4 py-1 text-sm rounded-md"
                                 Style="background:var(--gold); color:#000; border:none;" />
-                        </div>
-                        <div class="col-span-2 mt-2">
-                            <asp:Label ID="lblTicketError" runat="server" ForeColor="#ff6b6b" CssClass="text-sm" Style="display:none"></asp:Label>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <!-- Filter panel: User ID + Customer details (fixed last 6 months) -->
+    <!-- User ID + Customer details (fixed last 6 months) -->
     <div class="max-w-6xl mx-auto my-6 font-sans">
         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
             <asp:Panel ID="pnlFilter" runat="server">
@@ -105,23 +105,23 @@
     </div>
     <div class="max-w-6xl mx-auto my-6 font-sans">
         <asp:GridView ID="GridView1" runat="server" Caption="Tickets" CaptionStyle-CssClass="text-yellow-400 font-bold text-lg mb-2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="TK_ID" DataSourceID="SqlDataSource1" CssClass="min-w-full table-auto" HeaderStyle-CssClass="bg-yellow-400 text-black font-bold text-sm text-left" RowStyle-CssClass="text-white align-top" AlternatingRowStyle-CssClass="bg-black/5 text-white align-top" EditRowStyle-CssClass="bg-black text-white" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-<AlternatingRowStyle CssClass="bg-black/5 text-white align-top"></AlternatingRowStyle>
-            <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-                <asp:BoundField DataField="TK_ID" HeaderText="Ticket ID" ReadOnly="True" SortExpression="TK_ID" />
-                <asp:BoundField DataField="SW_ID" HeaderText="Show ID" SortExpression="SW_ID" />
-                <asp:BoundField DataField="CUS_ID" HeaderText="Customer ID" SortExpression="CUS_ID" />
-                <asp:BoundField DataField="TK_DATE" HeaderText="Date" SortExpression="TK_DATE" />
-                <asp:BoundField DataField="TK_STATUS" HeaderText="Status" SortExpression="TK_STATUS" />
-                <asp:BoundField DataField="TK_BOOKED_AT" HeaderText="Booked At" SortExpression="TK_BOOKED_AT" />
-                <asp:BoundField DataField="TK_QUANTITY" HeaderText="Quantity" SortExpression="TK_QUANTITY" />
-            </Columns>
+        <AlternatingRowStyle CssClass="bg-black/5 text-white align-top"></AlternatingRowStyle>
+                    <Columns>
+                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                        <asp:BoundField DataField="TK_ID" HeaderText="Ticket ID" ReadOnly="True" SortExpression="TK_ID" />
+                        <asp:BoundField DataField="SW_ID" HeaderText="Show ID" SortExpression="SW_ID" />
+                        <asp:BoundField DataField="CUS_ID" HeaderText="Customer ID" SortExpression="CUS_ID" />
+                        <asp:BoundField DataField="TK_DATE" HeaderText="Date" SortExpression="TK_DATE" />
+                        <asp:BoundField DataField="TK_STATUS" HeaderText="Status" SortExpression="TK_STATUS" />
+                        <asp:BoundField DataField="TK_BOOKED_AT" HeaderText="Booked At" SortExpression="TK_BOOKED_AT" />
+                        <asp:BoundField DataField="TK_QUANTITY" HeaderText="Quantity" SortExpression="TK_QUANTITY" />
+                    </Columns>
 
-<EditRowStyle CssClass="bg-black text-white"></EditRowStyle>
+        <EditRowStyle CssClass="bg-black text-white"></EditRowStyle>
 
-<HeaderStyle CssClass="bg-yellow-400 text-black font-bold text-sm text-left"></HeaderStyle>
+        <HeaderStyle CssClass="bg-yellow-400 text-black font-bold text-sm text-left"></HeaderStyle>
 
-<RowStyle CssClass="text-white align-top"></RowStyle>
+        <RowStyle CssClass="text-white align-top"></RowStyle>
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" DeleteCommand="DELETE FROM &quot;TICKETS&quot; WHERE &quot;TK_ID&quot; = :TK_ID" InsertCommand="INSERT INTO &quot;TICKETS&quot; (&quot;TK_ID&quot;, &quot;SW_ID&quot;, &quot;CUS_ID&quot;, &quot;TK_DATE&quot;, &quot;TK_STATUS&quot;, &quot;TK_BOOKED_AT&quot;, &quot;TK_QUANTITY&quot;) VALUES (:TK_ID, :SW_ID, :CUS_ID, :TK_DATE, :TK_STATUS, :TK_BOOKED_AT, :TK_QUANTITY)" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT t.&quot;TK_ID&quot;, t.&quot;SW_ID&quot;, t.&quot;CUS_ID&quot;, c.&quot;CUS_NAME&quot; AS &quot;CUS_NAME&quot;, t.&quot;TK_DATE&quot;, t.&quot;TK_STATUS&quot;, t.&quot;TK_BOOKED_AT&quot;, t.&quot;TK_QUANTITY&quot; FROM &quot;TICKETS&quot; t LEFT JOIN &quot;CUSTOMERS&quot; c ON t.&quot;CUS_ID&quot; = c.&quot;CUS_ID&quot; ORDER BY t.&quot;TK_DATE&quot; DESC" UpdateCommand="UPDATE &quot;TICKETS&quot; SET &quot;SW_ID&quot; = :SW_ID, &quot;CUS_ID&quot; = :CUS_ID, &quot;TK_DATE&quot; = :TK_DATE, &quot;TK_STATUS&quot; = :TK_STATUS, &quot;TK_BOOKED_AT&quot; = :TK_BOOKED_AT, &quot;TK_QUANTITY&quot; = :TK_QUANTITY WHERE &quot;TK_ID&quot; = :TK_ID">

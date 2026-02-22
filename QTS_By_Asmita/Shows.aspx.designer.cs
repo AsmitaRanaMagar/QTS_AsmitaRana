@@ -150,6 +150,15 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.TextBox txtType;
 
         /// <summary>
+        /// lblShowWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblShowWarning;
+
+        /// <summary>
         /// btnAddShow control.
         /// </summary>
         /// <remarks>

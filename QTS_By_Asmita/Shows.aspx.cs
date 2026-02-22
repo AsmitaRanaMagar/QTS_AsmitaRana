@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Data;
 using System.Web.UI.WebControls;
 
 namespace QTS_By_Asmita
@@ -12,6 +13,31 @@ namespace QTS_By_Asmita
 
         protected void AddShow_Click(object sender, EventArgs e)
         {
+            var newId = txtShowID.Text?.Trim();
+            if (!string.IsNullOrEmpty(newId))
+            {
+                try
+                {
+                    if (SqlDataSource1.Select(DataSourceSelectArguments.Empty) is DataView dv)
+                    {
+                        foreach (DataRowView row in dv)
+                        {
+                            var existing = Convert.ToString(row["SW_ID"]);
+                            if (string.Equals(existing, newId, StringComparison.OrdinalIgnoreCase))
+                            {
+                                lblShowWarning.Text = "Show id already exists.";
+                                lblShowWarning.Visible = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+
+            lblShowWarning.Text = string.Empty;
+            lblShowWarning.Visible = false;
+
             if (SqlDataSource1 != null)
             {
                 SqlDataSource1.InsertParameters["SW_ID"].DefaultValue = txtShowID.Text.Trim();

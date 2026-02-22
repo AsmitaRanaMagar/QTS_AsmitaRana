@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Data;
 
 namespace QTS_By_Asmita
 {
@@ -10,6 +11,33 @@ namespace QTS_By_Asmita
         }
         protected void AddHall_Click(object sender, EventArgs e)
         {
+            // Duplicate H_ID check (same style as Shows/Tickets)
+            var newId = txtHallID.Text?.Trim();
+            if (!string.IsNullOrEmpty(newId))
+            {
+                try
+                {
+                    if (SqlDataSource1.Select(DataSourceSelectArguments.Empty) is DataView dv)
+                    {
+                        foreach (DataRowView row in dv)
+                        {
+                            var existing = Convert.ToString(row["H_ID"]);
+                            if (string.Equals(existing, newId, StringComparison.OrdinalIgnoreCase))
+                            {
+                                lblHallWarning.Text = "Hall id already exists.";
+                                lblHallWarning.Visible = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+
+            // hide previous warning
+            lblHallWarning.Text = string.Empty;
+            lblHallWarning.Visible = false;
+
             if (SqlDataSource1 != null)
             {
                 SqlDataSource1.InsertParameters["H_ID"].DefaultValue = txtHallID.Text.Trim();

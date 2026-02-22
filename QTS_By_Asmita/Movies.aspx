@@ -61,7 +61,7 @@
                         <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine"
                             CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 min-h-12" Rows="3" />
 
-                        <div class="col-span-2">
+                        <div class="col-span-2 flex justify-center">
                             <asp:Label ID="lblMovieWarning" runat="server" Text="" CssClass="text-sm text-red-500 text-center w-full max-w-md" Visible="false" Role="alert"></asp:Label>
                         </div>
 
@@ -90,7 +90,7 @@
             </div>
 
             <!-- Repeater for top 3 halls -->
-            <asp:Repeater ID="rptTopHalls" runat="server" DataSourceID="SqlDataSourceOccupancy" OnItemCommand="rptTopHalls_ItemCommand">
+            <asp:Repeater ID="rptTopHalls" runat="server" DataSourceID="SqlDataSourceOccupancy" OnItemCommand="RptTopHalls_ItemCommand">
                 <HeaderTemplate>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
                 </HeaderTemplate>

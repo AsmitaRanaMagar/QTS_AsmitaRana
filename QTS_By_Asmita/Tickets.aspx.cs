@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Data;
 using System.Web.UI.WebControls;
 
 namespace QTS_By_Asmita
@@ -20,6 +21,33 @@ namespace QTS_By_Asmita
         }
         protected void AddTicket_Click(object sender, EventArgs e)
         {
+            // Duplicate TK_ID check (similar to Shows.AddShow_Click)
+            var newId = txtTicketID.Text?.Trim();
+            if (!string.IsNullOrEmpty(newId))
+            {
+                try
+                {
+                    if (SqlDataSource1.Select(DataSourceSelectArguments.Empty) is DataView dv)
+                    {
+                        foreach (DataRowView row in dv)
+                        {
+                            var existing = Convert.ToString(row["TK_ID"]);
+                            if (string.Equals(existing, newId, StringComparison.OrdinalIgnoreCase))
+                            {
+                                lblTicketWarning.Text = "Ticket id already exists.";
+                                lblTicketWarning.Visible = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+
+            // hide previous warning
+            lblTicketWarning.Text = string.Empty;
+            lblTicketWarning.Visible = false;
+
             var insertParams = SqlDataSource1?.InsertParameters;
             if (insertParams != null)
             {
@@ -44,9 +72,9 @@ namespace QTS_By_Asmita
                     {
                         insertParams["CUS_ID"].DefaultValue = ddlCustomerID.SelectedValue;
                     }
-                    else if (FindControl("txtCustomerID") is TextBox custTextbox)
+                    else if (FindControl("txtCustomerID") is TextBox customerTextbox)
                     {
-                        insertParams["CUS_ID"].DefaultValue = custTextbox.Text.Trim();
+                        insertParams["CUS_ID"].DefaultValue = customerTextbox.Text.Trim();
                     }
                 }
 
@@ -57,7 +85,7 @@ namespace QTS_By_Asmita
                     insertParams["TK_STATUS"].DefaultValue = txtStatus?.Text.Trim() ?? string.Empty;
 
                 if (insertParams["TK_BOOKED_AT"] != null)
-                    insertParams["TK_BOOKED_AT"].DefaultValue = DateTime.Now.ToString("s");
+                    insertParams["TK_BOOKED_AT"].DefaultValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                 if (insertParams["TK_QUANTITY"] != null)
                     insertParams["TK_QUANTITY"].DefaultValue = txtQuantity?.Text.Trim() ?? string.Empty;
@@ -92,7 +120,9 @@ namespace QTS_By_Asmita
             if (SqlDataSource1 == null)
                 return;
 
-            string startDate = DateTime.Today.AddMonths(-6).ToString("yyyy-MM-dd");
+            var dt = DateTime.Today.AddMonths(-6);
+            // Oracle TO_DATE in the SelectCommand expects 'YYYY-MM-DD' format — provide that exact string
+            string startDate = dt.ToString("yyyy-MM-dd");
             if (SqlDataSource1.SelectParameters["START_DATE"] != null)
             {
                 SqlDataSource1.SelectParameters["START_DATE"].DefaultValue = startDate;

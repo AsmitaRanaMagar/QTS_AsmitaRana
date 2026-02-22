@@ -17,8 +17,7 @@ namespace QTS_By_Asmita
             {
                 try
                 {
-                    var dv = SqlDataSource1.Select(DataSourceSelectArguments.Empty) as DataView;
-                    if (dv != null)
+                    if (SqlDataSource1.Select(DataSourceSelectArguments.Empty) is DataView dv)
                     {
                         foreach (DataRowView row in dv)
                         {
@@ -109,7 +108,7 @@ namespace QTS_By_Asmita
             }
         }
 
-        protected void rptTopHalls_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
+        protected void RptTopHalls_ItemCommand(object source, System.Web.UI.WebControls.RepeaterCommandEventArgs e)
         {
 
         }

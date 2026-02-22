@@ -24,20 +24,17 @@ namespace QTS_By_Asmita
                     catch
                     {
                         // Fallback to reading from SqlDataSource controls if direct DB access fails
-                        var dvCust = sdsCustomersCount.Select(DataSourceSelectArguments.Empty) as DataView;
-                        if (dvCust != null && dvCust.Count > 0 && dvCust[0]["CNT"] != DBNull.Value)
+                        if (sdsCustomersCount.Select(DataSourceSelectArguments.Empty) is DataView dvCust && dvCust.Count > 0 && dvCust[0]["CNT"] != DBNull.Value)
                         {
                             lblTotalCustomers.Text = dvCust[0]["CNT"].ToString();
                         }
 
-                        var dvMov = sdsMoviesCount.Select(DataSourceSelectArguments.Empty) as DataView;
-                        if (dvMov != null && dvMov.Count > 0 && dvMov[0]["CNT"] != DBNull.Value)
+                        if (sdsMoviesCount.Select(DataSourceSelectArguments.Empty) is DataView dvMov && dvMov.Count > 0 && dvMov[0]["CNT"] != DBNull.Value)
                         {
                             lblTotalMovies.Text = dvMov[0]["CNT"].ToString();
                         }
 
-                        var dvShows = sdsShowsTodayCount.Select(DataSourceSelectArguments.Empty) as DataView;
-                        if (dvShows != null && dvShows.Count > 0 && dvShows[0]["CNT"] != DBNull.Value)
+                        if (sdsShowsTodayCount.Select(DataSourceSelectArguments.Empty) is DataView dvShows && dvShows.Count > 0 && dvShows[0]["CNT"] != DBNull.Value)
                         {
                             lblTotalShowsToday.Text = dvShows[0]["CNT"].ToString();
                         }
