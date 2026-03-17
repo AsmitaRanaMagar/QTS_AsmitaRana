@@ -13,7 +13,7 @@
                 background-color: transparent !important;
                 color: #ffffff !important;
                 border: 1px solid #ffffff !important;
-                border-radius: .375rem !important; /* rounded-md */
+                border-radius: .375rem !important; 
                 padding: .25rem .5rem !important;
             }
             .custom-select option {
@@ -40,19 +40,32 @@
 
         .nav-link {
             color: var(--gold);
-            padding: 0.5rem 0.75rem;
+            padding: 0.375rem 0.75rem; /* slightly shorter buttons */
             border-radius: 0.375rem;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             font-weight: 500;
+            display: inline-block;
+            line-height: 1;
         }
 
         .nav-link:hover {
-            background-color: rgba(212,175,55,0.12);
+            background-color: var(--gold);
+            color: #000;
+            font-weight: 700;
+            transform: scale(1.01);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.30);
+        }
+
+        .nav-link:focus {
+            outline: 3px solid rgba(212,175,55,0.15);
+            outline-offset: 2px;
         }
 
         .nav-link.active {
             font-weight: 700;
-            border-bottom: 2px solid var(--gold);
+            background-color: var(--gold);
+            color: #000;
+            border-bottom: 2px solid rgba(0,0,0,0.12);
         }
 
         /* Grid / table spacing for GridView controls in content area */
@@ -131,20 +144,29 @@
             <asp:ScriptReference Name="WebFormsBundle" />
         </Scripts>
     </asp:ScriptManager>
-    <header class="bg-black border-b border-gray-800">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex items-center justify-between h-20">
 
-                
-                <asp:Image ID="Logo" runat="server" ImageUrl="~/Assets/Images/logo.png" CssClass="h-32 w-auto" AlternateText="Quick Cinema Hall" />
-                <nav class="hidden md:flex space-x-2" aria-label="Main navigation">
-                    <a class="nav-link" runat="server" href="~/">Home</a>
-                    <a class="nav-link" runat="server" href="~/About">About Us</a>
-                    <a class="nav-link" runat="server" href="~/Halls">Halls</a>
-                    <a class="nav-link" runat="server" href="~/Shows">Shows</a>
-                    <a class="nav-link" runat="server" href="~/Movies">Movies</a>
-                    <a class="nav-link" runat="server" href="~/Tickets">Tickets</a>
-                    <a class="nav-link" runat="server" href="~/Customer">Customer</a>
+<div class="flex items-center gap-3">
+    <asp:Image 
+        ID="Logo" 
+        runat="server" 
+        ImageUrl="~/Assets/Images/logo.png" 
+        CssClass="h-14 md:h-14 w-auto transform-gpu" 
+        AlternateText="Kumari Cinemas" 
+    />
+
+    <span class="text-2xl font-bold gold-text tracking-wide">
+        Kumari Cinemas
+    </span>
+</div>                <nav class="hidden md:flex space-x-2" aria-label="Main navigation">
+                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/Halls">Halls</a>
+                    <a class="nav-link" href="/Shows">Shows</a>
+                    <a class="nav-link" href="/Movies">Movies</a>
+                    <a class="nav-link" href="/Tickets">Tickets</a>
+                    <a class="nav-link" href="/Customer">Customer</a>
                 </nav>
                 <button id="nav-toggle" type="button"
                         class="md:hidden p-2 rounded hover:bg-gray-800">
@@ -157,23 +179,22 @@
         </div>
         <div id="nav-menu" class="md:hidden hidden bg-black">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a class="block nav-link" runat="server" href="~/">Home</a>
-                <a class="block nav-link" runat="server" href="~/About">About Us</a>
-                <a class="block nav-link" runat="server" href="~/Halls">Halls</a>
-                <a class="block nav-link" runat="server" href="~/Shows">Shows</a>
-                <a class="block nav-link" runat="server" href="~/Movies">Movies</a>
-                <a class="block nav-link" runat="server" href="~/Tickets">Tickets</a>
-                <a class="block nav-link" runat="server" href="~/Customer">Users</a>
+                <a class="block nav-link" href="/">Home</a>
+                <a class="block nav-link" href="/Halls">Halls</a>
+                <a class="block nav-link" href="/Shows">Shows</a>
+                <a class="block nav-link" href="/Movies">Movies</a>
+                <a class="block nav-link" href="/Tickets">Tickets</a>
+                <a class="block nav-link" href="/Customer">Users</a>
             </div>
         </div>
     </header>
-    <main class="flex-grow max-w-7xl mx-auto px-4 py-8">
+    <main class="flex-grow max-w-7xl mx-auto px-4 py-8" style="padding-top:6rem;">
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </main>
     <footer class="bg-black border-t border-gray-800 pt-8 pb-2 mt-auto w-full">
         <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between text-sm">
             <div class="mb-4 md:mb-0">
-                <span class="text-2xl font-bold gold-text tracking-wide">QUICK CINEMA HALL</span><br />
+                <span class="text-2xl font-bold gold-text tracking-wide"> Kumari Cinemas</span><br />
                 <span class="text-xs tracking-widest text-gray-400">Your Movie Destination</span>
             </div>
             <div class="flex flex-wrap gap-x-8 gap-y-2 mb-4 md:mb-0 gold-text">
@@ -188,7 +209,7 @@
             </div>
         </div>
         <div class="text-center gold-text text-xs mt-4">
-            © 2026 Quick Theatre System. All rights reserved.
+            © 2026 Kumari Cinemas. All rights reserved.
         </div>
     </footer>
 
