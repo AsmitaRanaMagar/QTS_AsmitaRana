@@ -95,7 +95,7 @@
                 <asp:BoundField DataField="MV_RELEASE" HeaderText="Release Date" DataFormatString="{0:yyyy-MM-dd}" />
                 <asp:BoundField DataField="SW_DATE" HeaderText="Show Date" DataFormatString="{0:yyyy-MM-dd}" />
                 <asp:BoundField DataField="SW_TIME" HeaderText="Show Time" />
-                <asp:BoundField DataField="SW_PRICE" HeaderText="Ticket Price" />
+                <asp:BoundField DataField="SW_PRICE" HeaderText="Show Price" />
                 <asp:BoundField DataField="SW_TYPE" HeaderText="Show Type" />
             </Columns>
         </asp:GridView>
@@ -115,10 +115,44 @@
                     <Columns>
                         <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                         <asp:BoundField DataField="H_ID" HeaderText="Id" ReadOnly="True" SortExpression="H_ID" />
-                        <asp:BoundField DataField="THR_ID" HeaderText="Theater" SortExpression="THR_ID" />
-                        <asp:BoundField DataField="H_NAME" HeaderText="Name" SortExpression="H_NAME" />
-                        <asp:BoundField DataField="H_CAPACITY" HeaderText="Capacity" SortExpression="H_CAPACITY" />
-                        <asp:BoundField DataField="H_STATUS" HeaderText="Status" SortExpression="H_STATUS" />
+
+                        <asp:TemplateField HeaderText="Theater" SortExpression="THR_ID">
+                            <ItemTemplate>
+                                <%# Eval("THR_ID") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="ddlEditTheatre" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" DataSourceID="SqlDataSourceTheatres" DataTextField="THR_NAME" DataValueField="THR_ID" AppendDataBoundItems="true" SelectedValue='<%# Bind("THR_ID") %>'>
+                                    <asp:ListItem Text="Select theatre" Value="" />
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Name" SortExpression="H_NAME">
+                            <ItemTemplate>
+                                <%# Eval("H_NAME") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtEditHallName" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("H_NAME") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Capacity" SortExpression="H_CAPACITY">
+                            <ItemTemplate>
+                                <%# Eval("H_CAPACITY") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtEditCapacity" runat="server" TextMode="Number" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("H_CAPACITY") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Status" SortExpression="H_STATUS">
+                            <ItemTemplate>
+                                <%# Eval("H_STATUS") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtEditStatus" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("H_STATUS") %>' />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server"
