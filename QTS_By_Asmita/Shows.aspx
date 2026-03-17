@@ -51,12 +51,64 @@
                 <Columns>
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                     <asp:BoundField DataField="SW_ID" HeaderText="Id" ReadOnly="True" SortExpression="SW_ID" />
-                    <asp:BoundField DataField="MV_ID" HeaderText="Movie" SortExpression="MV_ID" />
-                    <asp:BoundField DataField="H_ID" HeaderText="Hall" SortExpression="H_ID" />
-                    <asp:BoundField DataField="SW_DATE" HeaderText="Date" SortExpression="SW_DATE" DataFormatString="{0:yyyy-MM-dd}" />
-                    <asp:BoundField DataField="SW_TIME" HeaderText="Time" SortExpression="SW_TIME" />
-                    <asp:BoundField DataField="SW_PRICE" HeaderText="Price" SortExpression="SW_PRICE" />
-                    <asp:BoundField DataField="SW_TYPE" HeaderText="Type" SortExpression="SW_TYPE" />
+
+                    <asp:TemplateField HeaderText="Movie" SortExpression="MV_ID">
+                        <ItemTemplate>
+                            <%# Eval("MV_ID") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="ddlEditMovie" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" DataSourceID="SqlDataSourceMovies" DataTextField="MV_TITLE" DataValueField="MV_ID" AppendDataBoundItems="true" SelectedValue='<%# Bind("MV_ID") %>'>
+                                <asp:ListItem Text="Select movie" Value="" />
+                            </asp:DropDownList>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Hall" SortExpression="H_ID">
+                        <ItemTemplate>
+                            <%# Eval("H_ID") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="ddlEditHall" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" DataSourceID="SqlDataSourceHalls" DataTextField="H_NAME" DataValueField="H_ID" AppendDataBoundItems="true" SelectedValue='<%# Bind("H_ID") %>'>
+                                <asp:ListItem Text="Select hall" Value="" />
+                            </asp:DropDownList>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Date" SortExpression="SW_DATE">
+                        <ItemTemplate>
+                            <%# Eval("SW_DATE", "{0:yyyy-MM-dd}") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditDate" runat="server" TextMode="Date" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("SW_DATE", "{0:yyyy-MM-dd}") %>' />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Time" SortExpression="SW_TIME">
+                        <ItemTemplate>
+                            <%# Eval("SW_TIME") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditTime" runat="server" TextMode="Time" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("SW_TIME") %>' />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Price" SortExpression="SW_PRICE">
+                        <ItemTemplate>
+                            <%# Eval("SW_PRICE") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditPrice" runat="server" TextMode="Number" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("SW_PRICE") %>' />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Type" SortExpression="SW_TYPE">
+                        <ItemTemplate>
+                            <%# Eval("SW_TYPE") %>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditType" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("SW_TYPE") %>' />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
 
