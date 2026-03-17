@@ -128,12 +128,60 @@
                  <Columns>
                      <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                      <asp:BoundField DataField="MOVIE_ID" HeaderText="Id" ReadOnly="True" SortExpression="MOVIE_ID" />
-                     <asp:BoundField DataField="MOVIE_TITLE" HeaderText="Title" SortExpression="MOVIE_TITLE" />
-                     <asp:BoundField DataField="GENRE" HeaderText="Genre" SortExpression="GENRE" />
-                     <asp:BoundField DataField="LANGUAGE" HeaderText="Language" SortExpression="LANGUAGE" />
-                     <asp:BoundField DataField="RELEASE_DATE" HeaderText="Release Date" SortExpression="RELEASE_DATE" DataFormatString="{0:yyyy-MM-dd}" />
-                     <asp:BoundField DataField="DURATION" HeaderText="Duration" SortExpression="DURATION" />
-                     <asp:BoundField DataField="DESCRIPTION" HeaderText="Description" SortExpression="DESCRIPTION" />
+
+                     <asp:TemplateField HeaderText="Title" SortExpression="MOVIE_TITLE">
+                         <ItemTemplate>
+                             <%# Eval("MOVIE_TITLE") %>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtEditTitle" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("MOVIE_TITLE") %>' />
+                         </EditItemTemplate>
+                     </asp:TemplateField>
+
+                     <asp:TemplateField HeaderText="Genre" SortExpression="GENRE">
+                         <ItemTemplate>
+                             <%# Eval("GENRE") %>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtEditGenre" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("GENRE") %>' />
+                         </EditItemTemplate>
+                     </asp:TemplateField>
+
+                     <asp:TemplateField HeaderText="Language" SortExpression="LANGUAGE">
+                         <ItemTemplate>
+                             <%# Eval("LANGUAGE") %>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtEditLang" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("LANGUAGE") %>' />
+                         </EditItemTemplate>
+                     </asp:TemplateField>
+
+                     <asp:TemplateField HeaderText="Release Date" SortExpression="RELEASE_DATE">
+                         <ItemTemplate>
+                             <%# Eval("RELEASE_DATE", "{0:yyyy-MM-dd}") %>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtEditRelease" runat="server" TextMode="Date" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("RELEASE_DATE", "{0:yyyy-MM-dd}") %>' />
+                         </EditItemTemplate>
+                     </asp:TemplateField>
+
+                     <asp:TemplateField HeaderText="Duration" SortExpression="DURATION">
+                         <ItemTemplate>
+                             <%# Eval("DURATION") %>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtEditDuration" runat="server" TextMode="Number" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("DURATION") %>' />
+                         </EditItemTemplate>
+                     </asp:TemplateField>
+
+                     <asp:TemplateField HeaderText="Description" SortExpression="DESCRIPTION">
+                         <ItemTemplate>
+                             <%# Eval("DESCRIPTION") %>
+                         </ItemTemplate>
+                         <EditItemTemplate>
+                             <asp:TextBox ID="txtEditDesc" runat="server" TextMode="MultiLine" Rows="2" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("DESCRIPTION") %>' />
+                         </EditItemTemplate>
+                     </asp:TemplateField>
                  </Columns>
              </asp:GridView>
              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>"
