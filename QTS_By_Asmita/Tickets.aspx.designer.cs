@@ -13,6 +13,15 @@ namespace QTS_By_Asmita
 
     public partial class Tickets
     {
+        
+        /// <summary>
+        /// lblTicketSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTicketSuccess;
 
         /// <summary>
         /// pnlAdd control.
@@ -132,15 +141,6 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.TextBox txtStatus;
 
         /// <summary>
-        /// btnAddTicket control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddTicket;
-
-        /// <summary>
         /// lblTicketWarning control.
         /// </summary>
         /// <remarks>
@@ -148,6 +148,15 @@ namespace QTS_By_Asmita
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTicketWarning;
+
+        /// <summary>
+        /// btnAddTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddTicket;
 
         /// <summary>
         /// pnlFilter control.

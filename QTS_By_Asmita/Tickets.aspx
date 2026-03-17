@@ -8,6 +8,10 @@
             <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">
                 Add New Ticket
             </h3>
+            <!-- Success message shown above the form -->
+            <div class="flex justify-center mb-3">
+                <asp:Label ID="lblTicketSuccess" runat="server" Text="" CssClass="text-sm text-green-500 text-center w-full max-w-md" Visible="false" Role="status"></asp:Label>
+            </div>
             <asp:Panel ID="pnlAdd" runat="server">
                 <div class="flex justify-center">
                     <div class="grid grid-cols-[120px_1fr] gap-x-3 gap-y-3 text-sm w-full max-w-md">
@@ -80,8 +84,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-6 gap-3 items-center text-sm">
                     <h3 class="text-lg font-semibold mb-3 text-yellow-400 md:col-span-6 text-center">Filter Tickets (last 6 months)</h3>
 
-                    <label class="font-medium md:col-span-1 text-white">User ID</label>
-                    <asp:DropDownList ID="ddlFilterCustomer" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceCust" DataTextField="CUS_ID" DataValueField="CUS_ID" OnSelectedIndexChanged="DdlFilterCustomer_SelectedIndexChanged" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2 custom-select" AppendDataBoundItems="true">
+                    <label class="font-medium md:col-span-1 text-white">User Name</label>
+                    <asp:DropDownList ID="ddlFilterCustomer" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceCust" DataTextField="CUS_NAME" DataValueField="CUS_ID" OnSelectedIndexChanged="DdlFilterCustomer_SelectedIndexChanged" CssClass="w-full bg-transparent text-white border border-white rounded-md text-sm px-2 py-1 md:col-span-2 custom-select" AppendDataBoundItems="true">
                         <asp:ListItem Text="All users" Value="%" />
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSourceCust" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT &quot;CUS_ID&quot;, &quot;CUS_NAME&quot; FROM &quot;CUSTOMERS&quot; ORDER BY &quot;CUS_NAME&quot;">
@@ -104,24 +108,74 @@
         </div>
     </div>
     <div class="max-w-6xl mx-auto my-6 font-sans">
-        <asp:GridView ID="GridView1" runat="server" Caption="Tickets" CaptionStyle-CssClass="text-yellow-400 font-bold text-lg mb-2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="TK_ID" DataSourceID="SqlDataSource1" CssClass="min-w-full table-auto" HeaderStyle-CssClass="bg-yellow-400 text-black font-bold text-sm text-left" RowStyle-CssClass="text-white align-top" AlternatingRowStyle-CssClass="bg-black/5 text-white align-top" EditRowStyle-CssClass="bg-black text-white" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-        <AlternatingRowStyle CssClass="bg-black/5 text-white align-top"></AlternatingRowStyle>
-                    <Columns>
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-                        <asp:BoundField DataField="TK_ID" HeaderText="Ticket ID" ReadOnly="True" SortExpression="TK_ID" />
-                        <asp:BoundField DataField="SW_ID" HeaderText="Show ID" SortExpression="SW_ID" />
-                        <asp:BoundField DataField="CUS_ID" HeaderText="Customer ID" SortExpression="CUS_ID" />
-                        <asp:BoundField DataField="TK_DATE" HeaderText="Date" SortExpression="TK_DATE" />
-                        <asp:BoundField DataField="TK_STATUS" HeaderText="Status" SortExpression="TK_STATUS" />
-                        <asp:BoundField DataField="TK_BOOKED_AT" HeaderText="Booked At" SortExpression="TK_BOOKED_AT" />
-                        <asp:BoundField DataField="TK_QUANTITY" HeaderText="Quantity" SortExpression="TK_QUANTITY" />
-                    </Columns>
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="TK_ID" DataSourceID="SqlDataSource1" CssClass="min-w-full table-auto" HeaderStyle-CssClass="bg-yellow-400 text-black font-bold text-sm text-left" RowStyle-CssClass="text-white align-top" AlternatingRowStyle-CssClass="bg-black/5 text-white align-top" EditRowStyle-CssClass="bg-black text-white" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <AlternatingRowStyle CssClass="bg-black/5 text-white align-top"></AlternatingRowStyle>
+            <Columns>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:BoundField DataField="TK_ID" HeaderText="Ticket ID" ReadOnly="True" SortExpression="TK_ID" />
 
-        <EditRowStyle CssClass="bg-black text-white"></EditRowStyle>
+                <asp:TemplateField HeaderText="Show ID" SortExpression="SW_ID">
+                    <ItemTemplate>
+                        <%# Eval("SW_ID") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddlEditShow" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" DataSourceID="SqlDataSourceShows" DataTextField="SW_ID" DataValueField="SW_ID" AppendDataBoundItems="true" SelectedValue='<%# Bind("SW_ID") %>'>
+                            <asp:ListItem Text="Select show" Value="" />
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                </asp:TemplateField>
 
-        <HeaderStyle CssClass="bg-yellow-400 text-black font-bold text-sm text-left"></HeaderStyle>
+                <asp:TemplateField HeaderText="Customer ID" SortExpression="CUS_ID">
+                    <ItemTemplate>
+                        <%# Eval("CUS_ID") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddlEditCustomer" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1 custom-select" DataSourceID="SqlDataSourceCust" DataTextField="CUS_NAME" DataValueField="CUS_ID" AppendDataBoundItems="true" SelectedValue='<%# Bind("CUS_ID") %>'>
+                            <asp:ListItem Text="Select customer" Value="" />
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                </asp:TemplateField>
 
-        <RowStyle CssClass="text-white align-top"></RowStyle>
+                <asp:TemplateField HeaderText="Date" SortExpression="TK_DATE">
+                    <ItemTemplate>
+                        <%# Eval("TK_DATE", "{0:yyyy-MM-dd}") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtEditDate" runat="server" TextMode="Date" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("TK_DATE", "{0:yyyy-MM-dd}") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Status" SortExpression="TK_STATUS">
+                    <ItemTemplate>
+                        <%# Eval("TK_STATUS") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtEditStatus" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("TK_STATUS") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Booked At" SortExpression="TK_BOOKED_AT">
+                    <ItemTemplate>
+                        <%# Eval("TK_BOOKED_AT") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtEditBookedAt" runat="server" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("TK_BOOKED_AT") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Quantity" SortExpression="TK_QUANTITY">
+                    <ItemTemplate>
+                        <%# Eval("TK_QUANTITY") %>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtEditQuantity" runat="server" TextMode="Number" CssClass="w-full bg-transparent text-white border border-white rounded-md px-2 py-1" Text='<%# Bind("TK_QUANTITY") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+
+            <EditRowStyle CssClass="bg-black text-white"></EditRowStyle>
+            <HeaderStyle CssClass="bg-yellow-400 text-black font-bold text-sm text-left"></HeaderStyle>
+            <RowStyle CssClass="text-white align-top"></RowStyle>
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" DeleteCommand="DELETE FROM &quot;TICKETS&quot; WHERE &quot;TK_ID&quot; = :TK_ID" InsertCommand="INSERT INTO &quot;TICKETS&quot; (&quot;TK_ID&quot;, &quot;SW_ID&quot;, &quot;CUS_ID&quot;, &quot;TK_DATE&quot;, &quot;TK_STATUS&quot;, &quot;TK_BOOKED_AT&quot;, &quot;TK_QUANTITY&quot;) VALUES (:TK_ID, :SW_ID, :CUS_ID, :TK_DATE, :TK_STATUS, :TK_BOOKED_AT, :TK_QUANTITY)" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT t.&quot;TK_ID&quot;, t.&quot;SW_ID&quot;, t.&quot;CUS_ID&quot;, c.&quot;CUS_NAME&quot; AS &quot;CUS_NAME&quot;, t.&quot;TK_DATE&quot;, t.&quot;TK_STATUS&quot;, t.&quot;TK_BOOKED_AT&quot;, t.&quot;TK_QUANTITY&quot; FROM &quot;TICKETS&quot; t LEFT JOIN &quot;CUSTOMERS&quot; c ON t.&quot;CUS_ID&quot; = c.&quot;CUS_ID&quot; ORDER BY t.&quot;TK_DATE&quot; DESC" UpdateCommand="UPDATE &quot;TICKETS&quot; SET &quot;SW_ID&quot; = :SW_ID, &quot;CUS_ID&quot; = :CUS_ID, &quot;TK_DATE&quot; = :TK_DATE, &quot;TK_STATUS&quot; = :TK_STATUS, &quot;TK_BOOKED_AT&quot; = :TK_BOOKED_AT, &quot;TK_QUANTITY&quot; = :TK_QUANTITY WHERE &quot;TK_ID&quot; = :TK_ID">
