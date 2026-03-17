@@ -150,11 +150,6 @@ namespace QTS_By_Asmita
         protected global::System.Web.UI.WebControls.TextBox txtAge;
 
         /// <summary>
-        /// lblAgeWarning control.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Label lblAgeWarning;
-
-        /// <summary>
         /// lblCustomerWarning control.
         /// </summary>
         /// <remarks>
@@ -162,6 +157,24 @@ namespace QTS_By_Asmita
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCustomerWarning;
+
+        /// <summary>
+        /// lblAgeWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAgeWarning;
+
+        /// <summary>
+        /// lblCustomerDeleteError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCustomerDeleteError;
 
         /// <summary>
         /// btnAdd control.

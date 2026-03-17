@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using System.Data;
+using System.Web.UI.WebControls;
 
 namespace QTS_By_Asmita
 {
@@ -50,6 +51,8 @@ namespace QTS_By_Asmita
             lblAgeWarning.Visible = false;
             lblCustomerWarning.Text = string.Empty;
             lblCustomerWarning.Visible = false;
+            lblCustomerDeleteError.Text = string.Empty;
+            lblCustomerDeleteError.Visible = false;
 
             if (SqlDataSource1 != null)
             {
@@ -77,6 +80,27 @@ namespace QTS_By_Asmita
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        protected void SqlDataSource1_Deleted(object sender, SqlDataSourceStatusEventArgs e)
+        {
+            // If Oracle FK violated, show user-friendly message
+            if (e.Exception != null)
+            {
+                var msg = e.Exception.Message ?? string.Empty;
+                if (msg.Contains("ORA-02292") || msg.Contains("FK_TICKETS_CUSTOMERS"))
+                {
+                    lblCustomerDeleteError.Text = "Cannot delete this customer because the customer has booked tickets.";
+                    lblCustomerDeleteError.Visible = true;
+                    e.ExceptionHandled = true;
+                    return;
+                }
+
+                // other errors: show generic message
+                lblCustomerDeleteError.Text = "Error deleting customer: " + msg;
+                lblCustomerDeleteError.Visible = true;
+                e.ExceptionHandled = true;
+            }
         }
     }
 }
