@@ -10,10 +10,10 @@ ContentPlaceHolderID="MainContent"
 runat="server">
 
 <main class="max-w-7xl mx-auto px-6 py-8">
-    <!-- SUMMARY CARDS -->
+    
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <!-- Customers -->
+        
         <div class="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 shadow hover:shadow-lg transition">
 
             <div class="flex items-center justify-between">
@@ -45,7 +45,7 @@ runat="server">
         </div>
 
 
-        <!-- Movies -->
+        
         <div class="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 shadow hover:shadow-lg transition">
 
             <div class="flex items-center justify-between">
@@ -81,7 +81,7 @@ runat="server">
         </div>
 
 
-        <!-- Shows Today -->
+        
         <div class="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 shadow hover:shadow-lg transition">
 
             <div class="flex items-center justify-between">
@@ -119,18 +119,12 @@ runat="server">
         </div>
 
     </section>
-
-
-    <!-- QUICK ACTIONS -->
     <section class="mt-10">
-
         <h2 class="text-yellow-400 font-semibold mb-4">
             Quick Actions
         </h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-
-            <!-- Movies -->
             <asp:HyperLink runat="server"
             NavigateUrl="~/Movies"
             CssClass="block bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 hover:shadow-lg transition text-center flex flex-col items-center justify-center min-h-28">
@@ -145,9 +139,7 @@ runat="server">
                 </span>
 
             </asp:HyperLink>
-
-
-            <!-- Shows -->
+            
             <asp:HyperLink runat="server"
             NavigateUrl="~/Shows"
             CssClass="block bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 hover:shadow-lg transition text-center flex flex-col items-center justify-center min-h-28">
@@ -161,10 +153,7 @@ runat="server">
                     Shows
                 </span>
 
-            </asp:HyperLink>
-
-
-            <!-- Halls -->
+            </asp:HyperLink>            
             <asp:HyperLink runat="server"
             NavigateUrl="~/Halls"
             CssClass="block bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 hover:shadow-lg transition text-center flex flex-col items-center justify-center min-h-28">
@@ -178,9 +167,6 @@ runat="server">
                 </span>
 
             </asp:HyperLink>
-
-
-            <!-- Tickets -->
             <asp:HyperLink runat="server"
             NavigateUrl="~/Tickets"
             CssClass="block bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 hover:shadow-lg transition text-center flex flex-col items-center justify-center min-h-28">
@@ -196,7 +182,7 @@ runat="server">
             </asp:HyperLink>
 
 
-            <!-- Customers -->
+            
             <asp:HyperLink runat="server"
             NavigateUrl="~/Customer"
             CssClass="block bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800 hover:shadow-lg transition text-center flex flex-col items-center justify-center min-h-28">
@@ -217,11 +203,11 @@ runat="server">
 
 
 
-    <!-- LOWER SECTION -->
+    
     <section class="mt-10 grid lg:grid-cols-3 gap-6">
 
 
-        <!-- HALLS -->
+        
         <div class="bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800">
 
             <h3 class="text-yellow-400 font-semibold mb-4">
@@ -254,7 +240,7 @@ runat="server">
 
 
 
-        <!-- TOP MOVIES TABLE -->
+        
         <div class="lg:col-span-2 bg-gradient-to-br from-gray-900 to-black p-6 rounded-lg border border-gray-800">
 
             <h3 class="text-yellow-400 font-semibold mb-4">
@@ -326,7 +312,7 @@ runat="server">
     </section>
 
 
-    <!-- Data sources for counts -->
+    
     <asp:SqlDataSource ID="sdsCustomersCount" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;CUSTOMERS&quot;;"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sdsMoviesCount" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;MOVIES&quot;;"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sdsShowsTodayCount" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>" ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>" SelectCommand="SELECT COUNT(*) AS CNT FROM &quot;SHOWS&quot; WHERE TRUNC(&quot;SW_DATE&quot;) = TRUNC(SYSDATE)"></asp:SqlDataSource>

@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <!-- Copied from About.aspx: Select Hall for QTX section -->
+    
     <div class="max-w-xl mx-auto my-6 font-sans">
         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
             <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">Select Hall for QTX</h3>
@@ -71,7 +71,9 @@
             <asp:SqlDataSource ID="SqlDataSourceHallsSelect" runat="server"
                 ConnectionString="<%$ ConnectionStrings:ConnectionStringQTX %>"
                 ProviderName="<%$ ConnectionStrings:ConnectionStringQTX.ProviderName %>"
-                SelectCommand="SELECT H.&quot;H_ID&quot;, H.&quot;H_NAME&quot; FROM &quot;HALLS&quot; H JOIN &quot;THEATRES&quot; T ON H.&quot;THR_ID&quot; = T.&quot;THR_ID&quot; WHERE T.&quot;THR_ID&quot; = 'T010' ORDER BY H.&quot;H_NAME&quot;">
+                SelectCommand="SELECT H.&quot;H_ID&quot;, H.&quot;H_NAME&quot; FROM &quot;HALLS&quot; 
+                H JOIN &quot;THEATRES&quot; T ON H.&quot;THR_ID&quot; = T.&quot;THR_ID&quot; 
+                WHERE T.&quot;THR_ID&quot; = 'T010' ORDER BY H.&quot;H_NAME&quot;">
             </asp:SqlDataSource>
 
             <div class="grid grid-cols-[120px_1fr] gap-x-3 gap-y-3 text-sm w-full max-w-md">

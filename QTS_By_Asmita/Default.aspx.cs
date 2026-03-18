@@ -8,13 +8,13 @@ namespace QTS_By_Asmita
 {
     public partial class Default : Page
     {
+        // This runs when the page loads
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 try
                 {
-                    // Try direct DB access using the connection string/provider for more reliable counts
                     try
                     {
                         lblTotalCustomers.Text = GetCount("SELECT COUNT(*) AS CNT FROM \"CUSTOMERS\"").ToString();
@@ -23,7 +23,6 @@ namespace QTS_By_Asmita
                     }
                     catch
                     {
-                        // Fallback to reading from SqlDataSource controls if direct DB access fails
                         if (sdsCustomersCount.Select(DataSourceSelectArguments.Empty) is DataView dvCust && dvCust.Count > 0 && dvCust[0]["CNT"] != DBNull.Value)
                         {
                             lblTotalCustomers.Text = dvCust[0]["CNT"].ToString();
@@ -40,13 +39,11 @@ namespace QTS_By_Asmita
                         }
                     }
 
-                    // Ensure repeaters load their data from the SqlDataSource controls so real data is shown
                     try { rptHallsTheatre.DataBind(); } catch { }
                     try { rptTopMovies.DataBind(); } catch { }
                 }
                 catch (Exception)
                 {
-                    // If counts failed, set zeros and still attempt to bind lists so UI shows available data
                     lblTotalCustomers.Text = "0";
                     lblTotalMovies.Text = "0";
                     lblTotalShowsToday.Text = "0";
@@ -57,6 +54,7 @@ namespace QTS_By_Asmita
             }
         }
 
+        // Get the count from the database using SQL
         private int GetCount(string sql)
         {
             try

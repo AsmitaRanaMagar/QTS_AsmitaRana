@@ -7,13 +7,14 @@ namespace QTS_By_Asmita
 {
     public partial class Tickets : Page
     {
+        // Get the label that shows ticket success message
         private System.Web.UI.WebControls.Label GetLblTicketSuccess()
         {
-            // recursive lookup because Content controls can nest the label
             System.Web.UI.Control root = this;
             return FindControlRecursive(root, "lblTicketSuccess") as System.Web.UI.WebControls.Label;
         }
 
+        // Find a control by its ID
         private System.Web.UI.Control FindControlRecursive(System.Web.UI.Control root, string id)
         {
             if (root == null) return null;
@@ -27,6 +28,7 @@ namespace QTS_By_Asmita
             return null;
         }
 
+        // This runs when the page loads
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,9 +41,10 @@ namespace QTS_By_Asmita
                 }
             }
         }
+        // Add a new ticket when the button is clicked
         protected void AddTicket_Click(object sender, EventArgs e)
         {
-            // Clear previous success message
+            // Clear the success message if any
             var lblTicketSuccess = GetLblTicketSuccess();
             if (lblTicketSuccess != null)
             {
@@ -49,7 +52,7 @@ namespace QTS_By_Asmita
                 lblTicketSuccess.Visible = false;
             }
 
-            // Duplicate TK_ID check (similar to Shows.AddShow_Click)
+            // Check if the ticket ID already exists
             var newId = txtTicketID.Text?.Trim();
             if (!string.IsNullOrEmpty(newId))
             {
@@ -72,7 +75,7 @@ namespace QTS_By_Asmita
                 catch { }
             }
 
-            // hide previous warning
+            // Clear any previous warning message
             lblTicketWarning.Text = string.Empty;
             lblTicketWarning.Visible = false;
 
@@ -124,7 +127,7 @@ namespace QTS_By_Asmita
                 SqlDataSource1?.Insert();
                 GridView1.DataBind();
 
-                // show success message above the form
+                // Show the success message if ticket added
                 lblTicketSuccess = GetLblTicketSuccess();
                 if (lblTicketSuccess != null)
                 {
@@ -132,7 +135,7 @@ namespace QTS_By_Asmita
                     lblTicketSuccess.Visible = true;
                 }
 
-                // clear form fields
+                // Clear all form fields after adding
                 txtTicketID.Text = string.Empty;
                 if (DropDownList1 != null) DropDownList1.SelectedIndex = 0;
                 if (ddlCustomerID != null) ddlCustomerID.SelectedIndex = 0;
@@ -142,7 +145,7 @@ namespace QTS_By_Asmita
             }
             catch
             {
-                // in case of error ensure success label is hidden
+                // Hide the success message if there is an error
                 lblTicketSuccess = GetLblTicketSuccess();
                 if (lblTicketSuccess != null)
                 {
@@ -152,6 +155,7 @@ namespace QTS_By_Asmita
             }
         }
 
+        // This runs when the customer filter dropdown is changed
         protected void DdlFilterCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetStartDateToSixMonthsAgo();
@@ -165,6 +169,7 @@ namespace QTS_By_Asmita
             GridView1.DataBind();
         }
 
+        // Set the start date to 6 months ago for filtering
         private void SetStartDateToSixMonthsAgo()
         {
             if (SqlDataSource1 == null)
@@ -179,11 +184,13 @@ namespace QTS_By_Asmita
             }
         }
 
+        // This runs when the show dropdown is changed
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        // This runs when a row in the grid is selected
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 

@@ -6,12 +6,13 @@ namespace QTS_By_Asmita
 {
     public partial class Halls : Page
     {
+        // This runs when the page loads
         protected void Page_Load(object sender, EventArgs e)
         {
         }
+        // Add a new hall when the button is clicked
         protected void AddHall_Click(object sender, EventArgs e)
         {
-            // Duplicate H_ID check (same style as Shows/Tickets)
             var newId = txtHallID.Text?.Trim();
             if (!string.IsNullOrEmpty(newId))
             {
@@ -34,7 +35,6 @@ namespace QTS_By_Asmita
                 catch { }
             }
 
-            // hide previous warning
             lblHallWarning.Text = string.Empty;
             lblHallWarning.Visible = false;
 
@@ -60,6 +60,7 @@ namespace QTS_By_Asmita
             txtStatus.Text = string.Empty;
         }
 
+        // This runs when the hall dropdown is changed
         public void DdlHallSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlHallSelect?.SelectedValue is string selected && !string.IsNullOrEmpty(selected))

@@ -101,14 +101,12 @@
   <ItemGroup>
     <Content Include="Assets\Images\herosection.jpg" />
     <Content Include="Assets\Images\logo.png" />
-    <Content Include="TheaterShows.aspx" />
     <Content Include="Tickets.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Movies.aspx" />
     <Content Include="Shows.aspx" />
     <Content Include="Halls.aspx" />
     <Content Include="Customer.aspx" />
-    <Content Include="About.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -190,13 +188,6 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TheaterShows.aspx.cs">
-      <DependentUpon>TheaterShows.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TheaterShows.aspx.designer.cs">
-      <DependentUpon>TheaterShows.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Tickets.aspx.cs">
       <DependentUpon>Tickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -240,13 +231,6 @@
       <DependentUpon>Customer.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

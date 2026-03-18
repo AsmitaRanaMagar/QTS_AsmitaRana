@@ -8,7 +8,7 @@
             <h3 class="text-lg font-semibold mb-4 text-yellow-400 text-center">
                 Add New Ticket
             </h3>
-            <!-- Success message shown above the form -->
+            
             <div class="flex justify-center mb-3">
                 <asp:Label ID="lblTicketSuccess" runat="server" Text="" CssClass="text-sm text-green-500 text-center w-full max-w-md" Visible="false" Role="status"></asp:Label>
             </div>
@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <!-- User ID + Customer details (fixed last 6 months) -->
+    
     <div class="max-w-6xl mx-auto my-6 font-sans">
         <div class="bg-black text-white border-2 border-yellow-400 rounded-lg shadow-sm p-4">
             <asp:Panel ID="pnlFilter" runat="server">

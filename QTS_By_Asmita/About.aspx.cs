@@ -6,22 +6,21 @@ namespace QTS_By_Asmita
 {
     public partial class About : Page
     {
+        // This runs when the page loads
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Ensure halls dropdown is bound on first load so user sees entries
                 ddlHallSelect.DataBind();
             }
         }
 
+        // This runs when the halls data source is selected
         protected void SqlDataSourceHallsSelect_Selected(object sender, SqlDataSourceStatusEventArgs e)
         {
-            // Diagnostic: show number of rows returned or any exception if label exists
             var lbl = this.FindControl("lblHallsError") as Label;
             if (lbl == null)
             {
-                // No label present in markup; do nothing further
                 return;
             }
 
@@ -33,18 +32,17 @@ namespace QTS_By_Asmita
             }
             else
             {
-                var affected = e.AffectedRows; // may be -1 for some providers
+                var affected = e.AffectedRows;
                 lbl.Text = "Halls rows returned: " + affected.ToString();
                 lbl.Visible = true;
             }
         }
 
+        // This runs when the hall dropdown is changed
         protected void DdlHallSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Bind shows grid when a hall is selected
             if (!string.IsNullOrEmpty(ddlHallSelect.SelectedValue))
             {
-                // GridView already has DataSourceID set to SqlDataSourceShowsSelect in markup.
                 GridViewShows.DataBind();
                 GridViewShows.Visible = GridViewShows.Rows.Count > 0;
             }
@@ -54,9 +52,9 @@ namespace QTS_By_Asmita
             }
         }
 
+        // This runs when the submit button is clicked
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
-            // Same behavior as selecting hall: show shows if a hall is selected
             DdlHallSelect_SelectedIndexChanged(sender, e);
         }
     }

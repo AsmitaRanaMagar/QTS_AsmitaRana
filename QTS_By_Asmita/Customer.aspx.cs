@@ -7,10 +7,12 @@ namespace QTS_By_Asmita
 {
     public partial class Customer : Page
     {
+        // Add a new customer
         protected void AddCustomer_Click(object sender, EventArgs e)
         {
-            // Duplicate CUS_ID check
+            // Get the entered customer ID
             var newId = txtCustomerID.Text?.Trim();
+            // Check if customer ID already exists
             if (!string.IsNullOrEmpty(newId))
             {
                 try
@@ -32,7 +34,7 @@ namespace QTS_By_Asmita
                 catch { }
             }
 
-            // Age validation: if provided and less than 18, show warning and do not insert
+            // Check if age is entered and valid
             if (!string.IsNullOrWhiteSpace(txtAge.Text))
             {
                 if (int.TryParse(txtAge.Text.Trim(), out var age))
@@ -46,7 +48,7 @@ namespace QTS_By_Asmita
                 }
             }
 
-            // hide warnings when valid
+            // warning messages
             lblAgeWarning.Text = string.Empty;
             lblAgeWarning.Visible = false;
             lblCustomerWarning.Text = string.Empty;
@@ -54,6 +56,7 @@ namespace QTS_By_Asmita
             lblCustomerDeleteError.Text = string.Empty;
             lblCustomerDeleteError.Visible = false;
 
+            // Set values for new customer
             if (SqlDataSource1 != null)
             {
                 SqlDataSource1.InsertParameters["CUS_ID"].DefaultValue = txtCustomerID.Text.Trim();
@@ -66,9 +69,11 @@ namespace QTS_By_Asmita
                 SqlDataSource1.InsertParameters["CUS_REG_DATE"].DefaultValue = DateTime.Now.ToString("s");
             }
 
+            // Add customer to database
             SqlDataSource1.Insert();
             GridView1.DataBind();
 
+            // Clear form fields
             txtCustomerID.Text = string.Empty;
             txtName.Text = string.Empty;
             txtEmail.Text = string.Empty;
@@ -78,13 +83,15 @@ namespace QTS_By_Asmita
             txtAge.Text = string.Empty;
         }
 
+        // Handle row selection in the customer table
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 
+        // Handle customer delete event
         protected void SqlDataSource1_Deleted(object sender, SqlDataSourceStatusEventArgs e)
         {
-            // If Oracle FK violated, show user-friendly message
+            // Show error if delete fails
             if (e.Exception != null)
             {
                 var msg = e.Exception.Message ?? string.Empty;
@@ -96,7 +103,6 @@ namespace QTS_By_Asmita
                     return;
                 }
 
-                // other errors: show generic message
                 lblCustomerDeleteError.Text = "Error deleting customer: " + msg;
                 lblCustomerDeleteError.Visible = true;
                 e.ExceptionHandled = true;
